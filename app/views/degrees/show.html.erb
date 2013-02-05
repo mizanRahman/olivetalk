@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Profile:</b>
+  <%= @degree.profile %>
+</p>
+
+<p>
+  <b>University:</b>
+  <%= @degree.university %>
+</p>
+
+<p>
+  <b>Type of degree:</b>
+  <%= @degree.type_of_degree %>
+</p>
+
+<p>
+  <b>Primary focus:</b>
+  <%= @degree.primary_focus %>
+</p>
+
+<p>
+  <b>Secondary focus:</b>
+  <%= @degree.secondary_focus %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @degree.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @degree.end_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_degree_path(@degree) %> |
+<%= link_to 'Back', degrees_path %>

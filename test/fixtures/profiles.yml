@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  city: MyString
+  state: MyString
+  country: MyString
+  conflict: MyString
+  about_me: MyText
+  blog_url: MyString
+  facebook_url: MyString
+  twitter_url: MyString
+  user: 
+
+two:
+  first_name: MyString
+  last_name: MyString
+  city: MyString
+  state: MyString
+  country: MyString
+  conflict: MyString
+  about_me: MyText
+  blog_url: MyString
+  facebook_url: MyString
+  twitter_url: MyString
+  user: 

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  is: 
+  is_featured: false
+  last_poster_id: 1
+  last_post_at: 2013-02-02 11:13:29
+  user: 
+  network: 
+
+two:
+  name: MyString
+  is: 
+  is_featured: false
+  last_poster_id: 1
+  last_post_at: 2013-02-02 11:13:29
+  user: 
+  network: 

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  profile: 
+  university: 
+  type_of_degree: MyString
+  primary_focus: MyString
+  secondary_focus: MyString
+  start_date: 2013-02-03
+  end_date: 2013-02-03
+
+two:
+  profile: 
+  university: 
+  type_of_degree: MyString
+  primary_focus: MyString
+  secondary_focus: MyString
+  start_date: 2013-02-03
+  end_date: 2013-02-03

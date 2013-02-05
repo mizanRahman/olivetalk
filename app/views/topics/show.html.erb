@@ -1,0 +1,135 @@
+
+
+<div style="border-radius:5px;border:1px solid #d9d9d9;position:relative;box-shadow:0 0 2px 0 rgba(0, 0, 0, 0.1);background-color:#fff">
+
+	<div style="width:70%;float:left;">
+
+
+		<h1 style="background-color:#333;color:#fff;padding:15px;margin:0px;border-top-left-radius:5px;text-shadow:0 1px 0 #ccc;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;font-size:28px"><%= @topic.name %></h1>
+
+		<div style="padding:20px;background-color:#fff">
+		
+			<p style="color:#999"><%= @topic.content %></p>
+		
+			<p style="color:#ccc">Posted <%= time_ago_in_words(@topic.created_at) %> ago by ___</p>
+			
+		</div>
+
+		<hr style="margin-bottom:0px;margin-top:0px">
+		
+		<div style="padding:20px;background-color:#F7F7F7">
+		
+		
+			<% @topic.posts.each do |post| %>
+					
+				<div>
+					<div style="float:left;margin-right:15px">
+						<span class="thumbnail"><%= image_tag current_user.profile.avatar_url(:thumb) if current_user.profile.avatar? %></span>
+					</div>
+					
+					<div style="float:left">
+						<a href="#">Member Name</a><br />
+						<%= post.content %>
+					</div>
+					<div style="clear:both"></div>
+					<div style="color:#999;margin-top:10px;font-size:11px;text-align:right">Posted _ ago -  - </div>
+				</div>
+				<div style="clear:both"></div>
+				<hr>
+					
+			<% end %>
+			
+			<div style="text-align:center;color:#888;font-size:18px">Be the first to respond!</div>
+
+		
+		</div>
+		
+		<hr style="margin-top:0px">
+		
+		<div style="padding:20px">
+		
+			<div style="font-size:28px;font-weight:bold;margin-bottom:20px">Post a response</div>
+			<hr>
+			
+			<%= simple_form_for([@topic,@newpost]) do |f| %>
+			  <%= f.error_notification %>
+
+ 			 
+ 			 
+			 <div style="float:left">
+			 	<span class="thumbnail"><%= image_tag current_user.profile.avatar_url(:thumb) if current_user.profile.avatar? %></span>
+			 </div>
+			 <div class="form-inputs" style="margin-left:10px;width:650px;float:left">
+			    <%= f.input :content, :label => false, input_html: { style: "height:150px;width:95%" } %>
+ 			 </div>
+ 			 
+ 			<div style="clear:both"></div>
+ 			  			 
+ 			  <div class="form-actions" style="text-align:right">
+			  	 <%= f.submit 'Post Reply', class: 'btn-primary btn-large' %>
+			  </div>
+ 			 
+ 			 <div style="clear:both"></div>
+
+
+			<% end %>
+
+		
+		</div>
+
+	</div>
+
+	<div style="background-color:#fcfcfc;width:30%;height:100%;min-height:100%;float:right;border-top-right-radius:5px;border-bottom-right-radius:5px;position:static;right:0px">
+
+		<div style="border-left:1px solid #E8E9EB; padding:20px;">
+			<p class="nav-header" style="padding:0px">About the Discussion Leader</p>
+			<div style="float:left;margin-right:15px;width:90px">
+				<a href="" class="thumbnail"><%= image_tag @topic.user.profile.avatar_url(:thumb) if @topic.user.profile.avatar? %></a>
+			</div>
+
+			<div style="float:left;width:200px">
+			  <div style="font-size:18px;font-weight:bold;padding-top:5px;padding-bottom:5px"><%= @topic.user.profile.first_name %> <%= @topic.user.profile.last_name %></div>
+			    <div style="font-size:14px;line-height:16px;margin-bottom:2px"><%= @topic.user.profile.title %></div>
+			    <div style="font-size:10px;color:#999"></div>
+			</div>
+			
+			<div style="clear:both;padding-top:10px;margin-bottom:10px;color:#999;font-size:12px;line-height:18px">
+			
+				<%= @topic.user.profile.about_me %>
+		
+			</div>
+			
+			<span class="label label-success">OTI Co-Founder</span> <span class="label label-default">OliveTalk Moderator</span>
+			
+			<div style="clear:both"></div>
+
+			<hr>
+    
+
+			
+			<p class="nav-header" style="padding:0px"><%= @topic.user.profile.first_name %> Recommends You Read:</p>
+			
+			<p class="nav-header" style="padding:0px">Other Olives Recommend You Read:</p>
+			
+			<hr>
+			
+			<p class="nav-header" style="padding:0px">Statistics</p>
+					
+			<p class="nav-header" style="padding:0px">Tags</p>
+			
+			 <span class="label">Israel-Palestine</span>  <span class="label">Solutions</span>  <span class="label">Barghouti</span>  <span class="label">OneVoice</span> 
+						
+			<div style="clear:both"></div>
+
+
+		</div>
+		
+		<div style="clear:both"></div>
+
+
+	</div>
+	
+	<div style="clear:both"></div>
+
+
+</div>

@@ -3,3 +3,12 @@
 
 en:
   hello: "Hello world"
+
+  breadcrumbs:
+    application:
+      index: "Home"
+    networks:
+      index: "Networks"
+    topics:
+      index: "Engage"
+      new: "New Discussion"

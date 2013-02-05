@@ -13,12 +13,11 @@
 # gem 'pg'
 #
 development:
+  host: localhost
   adapter: postgresql
-  encoding: unicode
-  database: ot_development
-  pool: 5
-  username: ot
-  password:
+  database: ot
+  username: olivetalk
+  password: OT1800#
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -39,17 +38,16 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
+  host: ec2-54-243-130-137.compute-1.amazonaws.com
   adapter: postgresql
-  encoding: unicode
-  database: ot_test
-  pool: 5
-  username: ot
-  password:
+  database: d3igiutoscadpr
+  username: scbhjaaemwlmpf
+  password: stSNyMyZ1UbvtLdkHaDKz2_3TE
 
 production:
+  host: ec2-54-243-130-137.compute-1.amazonaws.com
   adapter: postgresql
-  encoding: unicode
-  database: ot_production
-  pool: 5
-  username: ot
-  password:
+  database: d3igiutoscadpr
+  username: scbhjaaemwlmpf
+  password: stSNyMyZ1UbvtLdkHaDKz2_3TE
+

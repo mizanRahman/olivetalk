@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>First name:</b>
+  <%= @profile.first_name %>
+</p>
+
+<p>
+  <b>Last name:</b>
+  <%= @profile.last_name %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @profile.city %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @profile.state %>
+</p>
+
+<p>
+  <b>Country:</b>
+  <%= @profile.country %>
+</p>
+
+<p>
+  <b>Conflict:</b>
+  <%= @profile.conflict %>
+</p>
+
+<p>
+  <b>About me:</b>
+  <%= @profile.about_me %>
+</p>
+
+<p>
+  <b>Blog url:</b>
+  <%= @profile.blog_url %>
+</p>
+
+<p>
+  <b>Facebook url:</b>
+  <%= @profile.facebook_url %>
+</p>
+
+<p>
+  <b>Twitter url:</b>
+  <%= @profile.twitter_url %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @profile.user %>
+</p>
+
+<%= image_tag @profile.avatar_url(:thumb) if @profile.avatar? %>
+
+
+
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Back', profiles_path %>

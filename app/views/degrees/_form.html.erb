@@ -1,0 +1,17 @@
+<%= simple_form_for(@degree) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :profile %>
+    <%= f.association :university %>
+    <%= f.input :type_of_degree %>
+    <%= f.input :primary_focus %>
+    <%= f.input :secondary_focus %>
+    <%= f.input :start_date %>
+    <%= f.input :end_date %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -1,14 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ot</title>
+  <title>OliveTalk</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+  	<div class="container">
+	    <a class="brand" href="<%= root_path %>">OliveTalk</a>
+    	<ul class="nav">
+			<li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Home", root_path %></li>
+			<li class="divider-vertical"></li>
+    		<li class="<%= 'active' if current_page?(topics_path) %>"><%= link_to "Engage", topics_path %></li>
+    		<li class="divider-vertical"></li>
+     	    <li><a href="#">Network</a></li>
+     	 	<li class="divider-vertical"></li>
+     	 	<li><a href="#">Learn</a></li>
+      		<li class="divider-vertical"></li>
+    	</ul>
+    	<form class="navbar-search pull-left">
+ 			 <input type="text" class="search-query" placeholder="Search">
+		</form>
+		
+		<ul class="nav pull-right">
+			<% if user_signed_in? %>
+				<li><%= link_to 'My Profile', profile_path %></li>
+				<li class="divider-vertical"></li>
+			  <li class="dropdown">
+			  	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><%= link_to 'Edit profile', edit_profile_path %></li>
+					<li><%= link_to 'Edit account', edit_user_registration_path %></li>
+					<li><a href="#">Submit Feedback</a></li>
+					<li class="divider"></li>
+					<li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+				</ul>
+			<% else %>
+			  <li><%= link_to "Sign up", new_user_registration_path %></li>
+			  <li class="divider-vertical"></li>
+			  <li><%= link_to "Login", new_user_session_path %></li>
+			<% end %>
+			<li class="divider-vertical"></li>
+			<li><a href="#"><i class="icon-globe"></i><span class="badge badge-important" style="position:relative;left:-1px;top:-10px;font-size:9px;padding-left:3px;padding-right:3px;line-height:8px">4</span> </a></li>
+			
+		</ul>
+	</div>
+  </div>
+</div>
+
+<div class="container">
+	<%= bootstrap_flash %>
+	<%= render_breadcrumbs %>
+	<%= yield %>
+</div>
+
+
+
+
+
 
 </body>
 </html>

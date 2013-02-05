@@ -1,4 +1,33 @@
 Ot::Application.routes.draw do
+
+
+  resource :profile, :controller => "profiles"
+
+
+  resources :universities
+
+
+  resources :degrees
+
+
+  resources :jobs
+
+
+  resources :profiles
+
+
+  resources :topics do
+  		resources :posts
+  end
+
+
+  resources :resources
+
+
+  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
+
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -12,6 +41,7 @@ Ot::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+  resources :networks
 
   # Sample resource route with options:
   #   resources :products do
@@ -48,7 +78,7 @@ Ot::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 

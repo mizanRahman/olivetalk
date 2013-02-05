@@ -18,6 +18,10 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+
+  gem "therubyracer"
+  gem "less-rails"
+  gem 'twitter-bootstrap-rails'
 end
 
 gem 'jquery-rails'
@@ -41,3 +45,6 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'bootstrap-sass', '~> 2.2.2.0'
 gem 'simple_form'
+gem 'country_select'
+gem "rmagick"
+gem "carrierwave"
