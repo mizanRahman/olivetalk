@@ -1,6 +1,9 @@
 class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
+  add_breadcrumb "Community", "/community"
+
+  
   def index
     @profiles = Profile.all
 
@@ -18,6 +21,7 @@ class ProfilesController < ApplicationController
    	else
    		@profile = Profile.find_by_user_id(current_user.id)
    	end
+    add_breadcrumb @profile.first_name + " " + @profile.last_name, ""
 
     respond_to do |format|
       format.html # show.html.erb
@@ -60,7 +64,7 @@ class ProfilesController < ApplicationController
   # PUT /profiles/1
   # PUT /profiles/1.json
   def update
-    @profile = Profile.find(params[:id])
+    @profile = Profile.find_by_user_id(current_user.id)
 
     respond_to do |format|
       if @profile.update_attributes(params[:profile])

@@ -12,3 +12,5 @@ en:
     topics:
       index: "Engage"
       new: "New Discussion"
+    resources:
+      index: "Pinboard"

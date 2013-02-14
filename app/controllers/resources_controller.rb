@@ -1,8 +1,16 @@
 class ResourcesController < ApplicationController
   # GET /resources
   # GET /resources.json
+  add_breadcrumb :index, :resources_path
+  load_and_authorize_resource
+
+    
   def index
-    @resources = Resource.all
+	if params[:tag]
+    	@resources = Resource.tagged_with(params[:tag])
+  	else
+   		@resources = Resource.all
+  	end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,9 +22,11 @@ class ResourcesController < ApplicationController
   # GET /resources/1.json
   def show
     @resource = Resource.find(params[:id])
+    @resource.read_count = @resource.read_count.to_i + 1
+    @resource.save
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { redirect_to @resource.url }
       format.json { render json: @resource }
     end
   end
@@ -41,10 +51,11 @@ class ResourcesController < ApplicationController
   # POST /resources.json
   def create
     @resource = Resource.new(params[:resource])
+    @resource.user = current_user
 
     respond_to do |format|
       if @resource.save
-        format.html { redirect_to @resource, notice: 'Resource was successfully created.' }
+        format.html { redirect_to resources_url, notice: 'Resource was successfully created.' }
         format.json { render json: @resource, status: :created, location: @resource }
       else
         format.html { render action: "new" }
@@ -60,7 +71,7 @@ class ResourcesController < ApplicationController
 
     respond_to do |format|
       if @resource.update_attributes(params[:resource])
-        format.html { redirect_to @resource, notice: 'Resource was successfully updated.' }
+        format.html { redirect_to resources_url, notice: 'Resource was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

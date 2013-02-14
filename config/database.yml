@@ -38,16 +38,16 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  host: ec2-54-243-130-137.compute-1.amazonaws.com
+  host: localhost
   adapter: postgresql
-  database: d3igiutoscadpr
-  username: scbhjaaemwlmpf
-  password: stSNyMyZ1UbvtLdkHaDKz2_3TE
+  database: ot
+  username: olivetalk
+  password: OT1800#
 
 production:
-  host: ec2-54-243-130-137.compute-1.amazonaws.com
+  host: localhost
   adapter: postgresql
-  database: d3igiutoscadpr
-  username: scbhjaaemwlmpf
-  password: stSNyMyZ1UbvtLdkHaDKz2_3TE
+  database: ot
+  username: olivetalk
+  password: OT1800#
 

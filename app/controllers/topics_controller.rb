@@ -2,9 +2,17 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
   add_breadcrumb :index, :topics_path
+  load_and_authorize_resource
   
   def index
-    @topics = Topic.all
+	if params[:tag]
+    	@topics = Topic.tagged_with(params[:tag])
+  	else
+   		@topics = Topic.all
+  	end
+  	
+  	@newtopic = Topic.new
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,7 +25,7 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @posts = @topic.posts
-	@newpost = @topic.posts.build
+	@newpost = Post.new
 	add_breadcrumb @topic.name
 
     respond_to do |format|

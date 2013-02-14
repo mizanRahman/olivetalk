@@ -1,6 +1,6 @@
 
 
-<div style="border-radius:5px;border:1px solid #d9d9d9;position:relative;box-shadow:0 0 2px 0 rgba(0, 0, 0, 0.1);background-color:#fff">
+<div class="cool-box">
 
 	<div style="width:70%;float:left;">
 
@@ -11,7 +11,7 @@
 		
 			<p style="color:#999"><%= @topic.content %></p>
 		
-			<p style="color:#ccc">Posted <%= time_ago_in_words(@topic.created_at) %> ago by ___</p>
+			<p style="color:#ccc">Posted <%= time_ago_in_words(@topic.created_at) %> ago</p>
 			
 		</div>
 
@@ -27,12 +27,12 @@
 						<span class="thumbnail"><%= image_tag current_user.profile.avatar_url(:thumb) if current_user.profile.avatar? %></span>
 					</div>
 					
-					<div style="float:left">
-						<a href="#">Member Name</a><br />
-						<%= post.content %>
+					<div style="float:left;width:675px;">
+						<strong><%= link_to (post.user.profile.first_name + " " + post.user.profile.last_name), profile_path(post.user.profile.id) %></a></strong> <span style="color:#999"><%= post.user.profile.title %></span>
+						<div style="font-size:13px;line-height:18px;margin-top:8px"><%= post.content %></div>
 					</div>
 					<div style="clear:both"></div>
-					<div style="color:#999;margin-top:10px;font-size:11px;text-align:right">Posted _ ago -  - </div>
+					<div style="color:#999;margin-top:10px;font-size:11px;text-align:right">Posted <%= time_ago_in_words(post.created_at) %> ago</div>
 				</div>
 				<div style="clear:both"></div>
 				<hr>
@@ -99,8 +99,13 @@
 		
 			</div>
 			
-			<span class="label label-success">OTI Co-Founder</span> <span class="label label-default">OliveTalk Moderator</span>
+			<div id="badgeships">
+			<% @topic.user.badgeships.each do |badgeship| %>
 			
+			<a class="label label-success" rel="popover" title="<%= badgeship.badge.name %>" data-content="<%= badgeship.badge.description %>"><%= badgeship.badge.name %></a>
+			
+			<% end %>
+			</div>
 			<div style="clear:both"></div>
 
 			<hr>
@@ -113,12 +118,35 @@
 			
 			<hr>
 			
+<a href="#myModal" role="button" class="btn" data-toggle="modal">Add a Resource</a>
+ 
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+<h3 id="myModalLabel">Add a Resource</h3>
+</div>
+<div class="modal-body">
+<p>Attach any relevant online resource to this topic to encourage others to review it.</p>
+
+<form action="/update" method="POST">
+    <input id="url" type="text" name="url"/>
+</form>
+</div>
+<div class="modal-footer">
+<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+<button class="btn btn-primary">Post</button>
+</div>
+</div>
+			
+			<hr>
+			
 			<p class="nav-header" style="padding:0px">Statistics</p>
 					
 			<p class="nav-header" style="padding:0px">Tags</p>
-			
-			 <span class="label">Israel-Palestine</span>  <span class="label">Solutions</span>  <span class="label">Barghouti</span>  <span class="label">OneVoice</span> 
-						
+								
+			<%= raw @topic.tag_list.map { |t| link_to t, topic_tag_path(t), :class => 'label' }.join(' ') %>
+				
 			<div style="clear:both"></div>
 
 

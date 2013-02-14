@@ -6,6 +6,9 @@ class NetworksController < ApplicationController
 		respond_to do |format|
 			format.html { render :action => :index }
 		end
+		
+ 		@json = User.all.to_gmaps4rails
+
 	end
 	
 	def new
@@ -27,5 +30,11 @@ class NetworksController < ApplicationController
   	      format.json { render :json => @network.errors, :status => :unprocessable_entity }
  	     end
  	   end
+ 	end
+ 	
+ 	def map
+ 		@network = Network.new(params[:id])
+ 		
+ 	
  	end
 end

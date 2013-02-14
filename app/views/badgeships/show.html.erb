@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @badgeship.user %>
+</p>
+
+<p>
+  <b>Badge:</b>
+  <%= @badgeship.badge %>
+</p>
+
+
+<%= link_to 'Edit', edit_badgeship_path(@badgeship) %> |
+<%= link_to 'Back', badgeships_path %>

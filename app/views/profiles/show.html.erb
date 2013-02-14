@@ -1,39 +1,57 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>First name:</b>
-  <%= @profile.first_name %>
-</p>
+<div class="cool-box" style="overflow:visible">
 
-<p>
-  <b>Last name:</b>
-  <%= @profile.last_name %>
-</p>
+	<div style="float:left;width:70%">
+	
+		<div style="float:left;margin:20px;position:absolute"><%= image_tag @profile.avatar_url(:large), :class => "thumbnail", :width => "200"   %></div>
+	
+		<h1 style="padding-left:250px;padding-top:30px;padding-bottom:20px;margin:0px;background-color:#fcfcfc"><%= @profile.first_name %> <%= @profile.last_name %></h1>		
 
-<p>
-  <b>City:</b>
-  <%= @profile.city %>
-</p>
+		<hr style="margin-top:0px" />
+		
+		<div style="color:#999;font-size:18px;margin-left:250px"><%= @profile.title %></div>
+		
+		<div style="margin-left:250px;margin-top:15px"><%= @profile.about_me %></div>
+		
+		<div style="margin-left:250px;margin-top:15px">
+			<% @profile.user.badgeships.each do |badgeship| %>
+			
+			<a class="label label-success" rel="popover" title="<%= badgeship.badge.name %>" data-content="<%= badgeship.badge.description %>"><%= badgeship.badge.name %></a>
+			
+			<% end %>
+		</div>
+	
+	</div>
+	
+	<div style="width:30%" class="cool-sidebar">
 
-<p>
-  <b>State:</b>
-  <%= @profile.state %>
-</p>
-
-<p>
-  <b>Country:</b>
-  <%= @profile.country %>
-</p>
+		<div style="border-left:1px solid #E8E9EB; padding:20px;">
+		
+			<div>
+				<strong>Location</strong> 
+				<%= @profile.city %>, <%= @profile.state %> <%= @profile.country %>
+				<hr />
+			</div>
+			
+			<div style="margin-top:10px;line-height:14px">
+				<strong>Degrees</strong>
+				<% @profile.degrees.each do |degree| %>
+				  <br /><br /><span style="font-size:12px">
+					<%= degree.university.name %> - <%= degree.end_date.year %><br />
+					<%= degree.type_of_degree %> in <%= degree.primary_focus %>
+				  </span>
+				<% end %>
+				<hr />
+			</div>
+			
 
 <p>
   <b>Conflict:</b>
   <%= @profile.conflict %>
 </p>
 
-<p>
-  <b>About me:</b>
-  <%= @profile.about_me %>
-</p>
+
 
 <p>
   <b>Blog url:</b>
@@ -50,14 +68,10 @@
   <%= @profile.twitter_url %>
 </p>
 
-<p>
-  <b>User:</b>
-  <%= @profile.user %>
-</p>
+		</div>
+	
+	</div>
+	
+	<div style="clear:both"></div>
 
-<%= image_tag @profile.avatar_url(:thumb) if @profile.avatar? %>
-
-
-
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+</div>

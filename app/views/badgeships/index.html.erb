@@ -1,0 +1,25 @@
+<h1>Listing badgeships</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Badge</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @badgeships.each do |badgeship| %>
+  <tr>
+    <td><%= badgeship.user %></td>
+    <td><%= badgeship.badge %></td>
+    <td><%= link_to 'Show', badgeship %></td>
+    <td><%= link_to 'Edit', edit_badgeship_path(badgeship) %></td>
+    <td><%= link_to 'Destroy', badgeship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Badgeship', new_badgeship_path %>

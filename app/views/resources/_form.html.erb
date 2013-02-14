@@ -5,11 +5,8 @@
     <%= f.input :url %>
     <%= f.input :title %>
     <%= f.input :description %>
-    <%= f.input :read_count %>
-    <%= f.input :votes %>
-    <%= f.input :is_approved %>
-    <%= f.association :user %>
-    <%= f.association :topic %>
+    <%= f.input :comment %>
+    <%= f.text_field :tag_list %>
   </div>
 
   <div class="form-actions">

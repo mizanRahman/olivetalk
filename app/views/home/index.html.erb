@@ -1,37 +1,34 @@
+<% if can? :read, :home %>
 <div class="row">
 <div class="span9">
+<% @topicsfeatured.each do |topic| %>
 <div class="hero-unit">
-  <h1>The challenges of a one-state reality?</h1>
-  <p>This week we are brainstorming the potential challenges of a "one-state" reality. Share your thoughts. </p>
+  <h1><%= topic.name %></h1>
+  <p><%= topic.content %></p>
   <p>
-    <a class="btn btn-primary btn-large">
-      Post Reply
-    </a>
+  	<%= link_to "Post Reply", topic_path(topic), :class => "btn btn-primary btn-large" %>
   </p>
 </div>
-
+<% end %>
 <ul class="thumbnails">
+<% @resources.each do |resource| %>
+
   <li class="span3">
-    <div class="thumbnail">
-      <img data-src="holder.js/300x200" alt="">
-      <h3>Thumbnail label</h3>
-      <p>Thumbnail caption...</p>
+    <div class="thumbnail" style="padding:0px">
+    	<div style="padding:10px">
+	      <img data-src="holder.js/300x200" alt="">
+    	  <h3><%= resource.title %></h3>
+      		<p style="color:#ccc;font-size:14px;line-height:14px"><%= resource.description %></p>
+		</div>
+		<div style="background-color:#eeeeee;padding:10px">
+			<div style="float:left"><%= image_tag resource.user.profile.avatar_url(:tiny) if resource.user.profile.avatar? %></div>
+			<div style="float:left;padding-left:8px;line-height:14px;width:200px"><strong><%= link_to resource.user.profile.first_name + " " + resource.user.profile.last_name, profile_path(resource.user.profile) %></strong> <%= resource.comment %></div>
+			<div style="clear:both"></div>
+		</div>
     </div>
   </li>
-  <li class="span3">
-    <div class="thumbnail">
-      <img data-src="holder.js/300x200" alt="">
-      <h3>Thumbnail label</h3>
-      <p>Thumbnail caption...</p>
-    </div>
-  </li>
-    <li class="span3">
-    <div class="thumbnail">
-      <img data-src="holder.js/300x200" alt="">
-      <h3>Thumbnail label</h3>
-      <p>Thumbnail caption...</p>
-    </div>
-  </li>
+
+<% end %>
 </ul>
 
 </div>
@@ -73,3 +70,32 @@
 </div>
 
 </div>
+<% else %>
+        <div class="page-header">
+            <div class="container">
+                <h1>OliveTalk</h1>
+                <p>The exclusive platform of the Olive Tree Initiative.</p>
+                <div class="button-container"><a href="<%= new_user_session_path %>" class="btn">Sign In</a></div>
+            </div>
+        </div>
+        
+	<div class="row" style="position:relative;top:500px">
+	
+	<div class="span4">
+		<h4>About the Project</h4>
+	</div>
+	
+	<div class="span4">
+		<h4>About the Olive Tree Initiative</h4>
+		<p></p>
+	</div>
+	
+	<div class="span4">
+		<h4>About the Centre for New Diplomacy</h4>
+		<p></p>
+	</div>
+	
+
+	</div>
+	
+<% end %>

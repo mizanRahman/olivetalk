@@ -1,31 +1,102 @@
-<h1>Listing topics</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Last poster</th>
-    <th>Last post at</th>
-    <th>User</th>
-    <th>Network</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div style="border-radius:5px;border:1px solid #d9d9d9;position:relative;box-shadow:0 0 2px 0 rgba(0, 0, 0, 0.1);background-color:#fff">
+
+	<div style="width:70%;float:left;">
+		
+		<div style="padding:20px">
+
+
+
 
 <% @topics.each do |topic| %>
-  <tr>
-    <td><%= topic.name %></td>
-    <td><%= topic.last_poster_id %></td>
-    <td><%= topic.last_post_at %></td>
-    <td><%= topic.user %></td>
-    <td><%= topic.network %></td>
-    <td><%= link_to 'Show', topic %></td>
-    <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
-    <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<div style="float:left">
+	<div style="font-size:18px;font-weight:bold"><%= link_to topic.name, topic %></div>
+	<div>Created by <%= topic.user.profile.first_name %> <%= topic.user.profile.last_name %></div>
+	<% if can? :destroy, topic %>
+	<div>Admin: <%= link_to 'Edit', edit_topic_path(topic) %> <%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+	<% end %>
+</div>
+<div style="float:right;color:#ccc;font-weight:bold;font-size:11px;line-height:14px">
+ <% userArray = Array.new
+ 	usercount = 0
+  %>
+ <% topic.posts.each do |post| %>
+ <%  
+ 	if !userArray.include?(post.user.id)
+ %>
+ <%= image_tag post.user.profile.avatar_url(:tiny) if post.user.profile.avatar? %>
+
+ <%
+ 	usercount = usercount + 1
+ 	end
+ 	
+ 	userArray.push post.user.id
+ 
+   %>
+ <% end %>
+  <br /><%= usercount %> olives have posted <%= topic.posts.count %> replies.
+</div>
+<div style="clear:both"></div>
+<hr />
 <% end %>
-</table>
 
-<br />
 
-<%= link_to 'New Topic', new_topic_path %>
+		</div>
+
+	</div>
+	
+	<div style="background-color:#fcfcfc;width:30%;height:100%;min-height:100%;float:right;border-top-right-radius:5px;border-bottom-right-radius:5px;position:static;right:0px">
+
+		<div style="border-left:1px solid #E8E9EB;">
+
+			<div style="padding:20px;background-color:#f5f5f5;text-align:center"><a href="#myModal" role="button" class="btn btn-primary btn-large" data-toggle="modal">Start a Discussion</a>
+ 
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<%= simple_form_for(@newtopic) do |f| %>
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+<h3 id="myModalLabel">Lead a Discussion</h3>
+</div>
+<div class="modal-body">
+<p>Attach any relevant online resource to this topic to encourage others to review it.</p>
+
+
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name, :input_html => { :rel => "popover", :title => "test title", :"data-content" => "this is a major test" } %>
+		
+	<%= f.input :content, :as => :text, :input_html => { :rows => 8 } %>
+	
+	<%= f.input :tag_list %>
+
+    <%= f.association :network %>
+  </div>
+
+
+</div>
+<div class="modal-footer">
+<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+<button class="btn btn-primary">Create Discussion</button>
+</div>
+<% end %>
+</div>
+<!-- End Modal -->
+</div>
+
+				<div id="tag_cloud" style="padding:20px">
+				<h3>Tags</h3>
+ 				 <% tag_cloud Topic.tag_counts, %w[label] do |tag, css_class| %>
+ 				   <%= link_to tag.name, topic_tag_path(tag.name), class: css_class, style: "margin-bottom:5px" %><br />
+ 				 <% end %>
+				</div>
+
+			</div>
+		
+		</div>
+
+		<div style="clear:both"></div>
+
+
+</div>

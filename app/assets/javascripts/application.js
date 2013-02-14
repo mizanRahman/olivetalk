@@ -14,3 +14,27 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+
+
+!function ($) {
+
+  $(function(){
+
+
+    $("a[rel=popover]").popover({trigger: 'hover'})
+      .click(function(e) {
+        e.preventDefault()
+      })
+      
+    $("[rel=popover]").popover()
+      .click(function(e) {
+        e.preventDefault()
+      })
+      
+      
+    $('#url').preview({key:'c840fa76c579422694e3c28bec58fdfa'})
+
+      
+      
+  })
+})

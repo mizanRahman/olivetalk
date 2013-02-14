@@ -48,3 +48,8 @@ gem 'simple_form'
 gem 'country_select'
 gem "rmagick"
 gem "carrierwave"
+gem 'acts-as-taggable-on'
+gem 'rails_admin'
+gem 'omniauth-facebook'
+gem 'cancan'
+gem 'gmaps4rails'

@@ -1,36 +1,56 @@
-<h1>Listing resources</h1>
-
-<table>
-  <tr>
-    <th>Url</th>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Read count</th>
-    <th>Votes</th>
-    <th>Is approved</th>
-    <th>User</th>
-    <th>Topic</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<div style="float:left">
+<div style="float:left;font-size:20px;color:grey;line-height:28px"><span style="font-weight:bold;font-size:24px;color:#000"><em>Pinboard</em></span> is a place to share valuable news articles, research, and journals related to conflict <br />analysis and resolution. Browse by tag or post a pin to share.</div>
+<div style="clear:both;padding-top:20px"></div>
+<ul class="thumbnails">
 <% @resources.each do |resource| %>
-  <tr>
-    <td><%= resource.url %></td>
-    <td><%= resource.title %></td>
-    <td><%= resource.description %></td>
-    <td><%= resource.read_count %></td>
-    <td><%= resource.votes %></td>
-    <td><%= resource.is_approved %></td>
-    <td><%= resource.user %></td>
-    <td><%= resource.topic %></td>
-    <td><%= link_to 'Show', resource %></td>
-    <td><%= link_to 'Edit', edit_resource_path(resource) %></td>
-    <td><%= link_to 'Destroy', resource, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+
+
+  <li class="span3">
+    <div class="thumbnail" style="padding:0px">
+    	<div style="padding:10px">
+	      <img data-src="holder.js/300x200" alt="">
+    	  <h3><%= resource.title %></h3>
+      		<p style="color:#ccc;font-size:14px;line-height:14px"><%= resource.description %></p>
+      		<p><%= link_to 'Show', resource %> - <%= link_to 'Edit', edit_resource_path(resource) %> - <%= link_to 'Destroy', resource, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+		</div>
+		<div style="background-color:#eeeeee;padding:10px">
+			<div style="float:left"><%= image_tag resource.user.profile.avatar_url(:tiny) if resource.user.profile.avatar? %></div>
+			<div style="float:left;padding-left:8px;line-height:14px;width:200px"><strong><%= link_to resource.user.profile.first_name + " " + resource.user.profile.last_name, profile_path(resource.user.profile) %></strong> <%= resource.comment %></div>
+			<div style="clear:both"></div>
+		</div>
+    </div>
+  </li>
+
 <% end %>
-</table>
+</ul>
+
+</div>
+
+<div style="float:right;" class="span3">
+
+	<a class="btn btn-primary btn-large" href="#" style="width:230px;margin-bottom:10px;"><i class="icon-map-marker icon-white"></i> Add a Pin</a>
+	
+	<div style="background-color:#F7F7F7;border-radius:5px;border:1px solid #d9d9d9">
+	
+		<div style="padding:20px">
+			
+			<h4 style="padding:0px;margin:0px">Browse by Tag</h4>
+			<hr />
+ 				 <% tag_cloud Resource.tag_counts, %w[label] do |tag, css_class| %>
+ 				   <%= link_to tag.name, resource_tag_path(tag.name), class: css_class, style: "margin-bottom:5px" %><br />
+ 				 <% end %>
+			
+			
+			
+	
+		</div>
+		
+	</div>
+
+</div>
+
+<div style="clear:both"></div>
+
 
 <br />
 
