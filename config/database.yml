@@ -42,12 +42,15 @@ test:
   adapter: postgresql
   database: ot
   username: olivetalk
-  password: OT1800#
+  password: OT1800##
 
 production:
-  host: localhost
   adapter: postgresql
-  database: ot
-  username: olivetalk
-  password: OT1800#
+  encoding: unicode
+  pool: 5
+  database: d1qikig8ld92t7
+  username: dimgtegcdjeqdx
+  password: r_jIo0gbYQCxc7YAmX7aBRc9sM
+  host: ec2-54-243-234-148.compute-1.amazonaws.com
+  port: 5432
 
