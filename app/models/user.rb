@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
   after_create :create_new_profile
   
   def create_new_profile
+  		self.role = "unapproved"
+  		self.save
 		@profile = Profile.new
 		@profile.user_id = self.id
 		@profile.city = "Los Angeles"
