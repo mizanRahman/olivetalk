@@ -1,15 +1,19 @@
 Ot::Application.routes.draw do
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
-    
-  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
+
+  mount RailsAdmin::Engine => '/manage', :as => 'rails_admin'
+
+  
 
   resources :badgeships
   resources :badges
-  resources :profiles
+  resources :profiles do
+	resources :jobs
+	resources :degrees
+  end
   resources :universities
-  resources :degrees
-  resources :jobs
   resources :resources
   resources :networks
   
@@ -21,6 +25,6 @@ Ot::Application.routes.draw do
 
   get 'resources/tag/:tag', to: 'resources#index', as: :resource_tag
 
-  root :to => 'home#index'
+  root :to => "home#index"
 
 end

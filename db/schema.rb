@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130213213507) do
+ActiveRecord::Schema.define(:version => 20130214205704) do
 
   create_table "badges", :force => true do |t|
     t.string   "name"
@@ -95,6 +95,9 @@ ActiveRecord::Schema.define(:version => 20130213213507) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "avatar"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "gmaps"
   end
 
   add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"

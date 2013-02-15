@@ -1,6 +1,8 @@
 class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
+  add_breadcrumb "Home", :root_path
+
   add_breadcrumb "Community", "/community"
 
   
@@ -43,6 +45,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1/edit
   def edit
     @profile = Profile.find_by_user_id(current_user.id)
+	add_breadcrumb "My Profile", profile_path(@profile)
   end
 
   # POST /profiles

@@ -1,14 +1,19 @@
-<%= simple_form_for(@degree) do |f| %>
+<%= render 'common/submenu' %>
+
+<%= simple_form_for([:profile,@degree]) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :profile %>
     <%= f.association :university %>
     <%= f.input :type_of_degree %>
     <%= f.input :primary_focus %>
     <%= f.input :secondary_focus %>
-    <%= f.input :start_date %>
-    <%= f.input :end_date %>
+    <%= f.input :start_date, as: :date, start_year: Date.today.year - 40,
+                              end_year: Date.today.year, discard_day: true,
+                              order: [:month, :year] %>
+    <%= f.input :end_date, as: :date, start_year: Date.today.year - 40,
+                              end_year: Date.today.year + 7, discard_day: true,
+                              order: [:month, :year] %>
   </div>
 
   <div class="form-actions">

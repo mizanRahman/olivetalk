@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<div class="navbar navbar-fixed-top">
+<div class="navbar navbar-fixed-top <% if !user_signed_in? %>navbar-inverse<% end %>">
   <div class="navbar-inner">
   	<div class="container">
 	    <a class="brand" href="<%= root_path %>">OliveTalk</a>
@@ -22,24 +22,30 @@
     		<li class="divider-vertical"></li>
     		<li class="<%= 'active' if current_page?(resources_path) %>"><%= link_to "Pinboard", resources_path %></li>
     		<li class="divider-vertical"></li>
-     	    <li><a href="#">Network</a></li>
+     	    <li class="<%= 'active' if current_page?(topics_path) %>"><%= link_to "Community", networks_path %></li>
      	 	<li class="divider-vertical"></li>
      	 	<li><a href="#">Olive University</a></li>
       		<li class="divider-vertical"></li>
       		<% end %>
     	</ul>
-    	<form class="navbar-search pull-left">
- 			 <input type="text" class="search-query" placeholder="Search">
-		</form>
 		
 		<ul class="nav pull-right">
 			<% if user_signed_in? %>
-				<li><%= link_to 'My Profile', profile_path(current_user.profile.id) %></li>
+				<li>
+				<%= if current_user.profile? then
+					link_to 'My Profile', profile_path(current_user.profile.id)
+					
+				end %>
+				</li>
 				<li class="divider-vertical"></li>
 			  <li class="dropdown">
 			  	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> <b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li><%= link_to 'Edit profile', edit_profile_path(current_user.profile.id) %></li>
+					<li>
+					<%= if current_user.profile? then
+						link_to 'Edit profile', edit_profile_path(current_user.profile.id) 
+					end %>
+					</li>
 					<li><%= link_to 'Edit account', edit_user_registration_path %></li>
 					<li><a href="#">Submit Feedback</a></li>
 					<li class="divider"></li>

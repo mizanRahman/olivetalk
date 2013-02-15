@@ -1,12 +1,18 @@
 class ApplicationController < ActionController::Base
-
-  	add_breadcrumb :index, :root_path
-
   
   protect_from_forgery
   #check_authorization
   
- rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+  def check_for_profile
+  
+		if !Profile.find_by_user_id(current_user.id) then
+			redirect_to :controller => :profiles, :action => :new
+		end
+  
   end
+  
+ rescue_from CanCan::AccessDenied do |exception|
+    redirect_to '/', :alert => exception.message
+  end
+
 end

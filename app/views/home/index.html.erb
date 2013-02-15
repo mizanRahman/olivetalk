@@ -73,21 +73,31 @@
 <% else %>
         <div class="page-header">
             <div class="container">
-                <h1>OliveTalk</h1>
-                <p>The exclusive platform of the Olive Tree Initiative.</p>
-                <div class="button-container"><a href="<%= new_user_session_path %>" class="btn">Sign In</a></div>
+                <h1>OliveTalk<span style="position:relative;font-size:14px;top:-74px;left:10px;height:14px;line-height:14px">BETA</span></h1>
+                <p style="font-size:35px">The exclusive conflict analysis platform of the Olive Tree Initiative.</p>
+
+                <div class="button-container"><a href="<%= new_user_session_path %>" class="btn">Log In</a></div>
+
+                <div class="button-container"><a href="<%= new_user_registration_path %>" class="btn">Sign Up</a></div>
+
             </div>
         </div>
+        <div style="width:100%;background-color:#000;height:30px;text-align:center;top:540px;left:0px;position:absolute">Bah</div>
         
 	<div class="row" style="position:relative;top:500px">
 	
 	<div class="span4">
 		<h4>About the Project</h4>
+		<div style="float:left;padding-top:10px;padding-bottom:10px"><img src="/olive.png" style="height:100px;margin-right:10px;" /></div>
+		<p style="color:#888;font-size:12px">OliveTalk is a next-generation, online conflict analysis platform produced through a collaboration between the Centre for New Diplomacy and Olive Tree Initiative. </p>
+		<p style="color:#888;font-size:12px">The platform enables users to connect and discuss, as well as participate in one-of-a-kind direct-engagement opportunities with actors in the Middle East.</p>
 	</div>
 	
 	<div class="span4">
 		<h4>About the Olive Tree Initiative</h4>
-		<p></p>
+		<div style="float:left;padding-top:10px;padding-bottom:10px"><img src="/oti.jpg" style="height:100px;margin-right:10px;" /></div>
+
+		<p style="color:#888;font-size:12px">The Olive Tree Initiative promote conflict analysis and resolution through Experiential Education by providing students and community  with the education, training and experiences needed to better negotiate and solve conflicts. Since its establishment in 2007, the Olive Tree Initiative has facilitated seven experiential learning opportunities in Israel/Palestine and Turkey-Armenia.</p>
 	</div>
 	
 	<div class="span4">
@@ -97,5 +107,6 @@
 	
 
 	</div>
+
 	
 <% end %>

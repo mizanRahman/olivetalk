@@ -1,20 +1,21 @@
 <%= simple_form_for(@profile, :html => { :multipart => true }) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
+  <div class="form-inputs" style="width:50%;float:left">
     <%= f.input :first_name %>
     <%= f.input :last_name %>
     <%= f.input :city %>
     <%= f.input :state %>
     <%= f.input :country %>
-    <%= f.input :conflict %>
-    <%= f.input :about_me %>
-    <%= f.input :blog_url %>
-    <%= f.input :facebook_url %>
-    <%= f.input :twitter_url %>
-    <%= f.association :user %>
+  </div>
+  <div class="form-inputs" style="width:50%;float:left">
+    <%= f.input :about_me, :input_html => { :style => "height:100px;width:400px", :maxlength => 150 }, :hint => "150 characters or less" %>
+    <%= f.input :conflict, :hint => "Which conflict are you most passionate about?" %>
+    <%= f.input :facebook_url, :label => "Facebook Profile URL", :hint => "Your email will not be available to other members, but your Facebook will." %>
     <%= f.file_field :avatar %>
   </div>
+  
+  <div style="clear:both"></div>
 
   <div class="form-actions">
     <%= f.button :submit %>

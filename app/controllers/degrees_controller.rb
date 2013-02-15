@@ -2,7 +2,8 @@ class DegreesController < ApplicationController
   # GET /degrees
   # GET /degrees.json
   def index
-    @degrees = Degree.all
+	@profile = Profile.find(params[:profile_id])
+    @degrees = @profile.degrees
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,6 +26,7 @@ class DegreesController < ApplicationController
   # GET /degrees/new.json
   def new
     @degree = Degree.new
+    @degree.profile = current_user.profile
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +43,7 @@ class DegreesController < ApplicationController
   # POST /degrees.json
   def create
     @degree = Degree.new(params[:degree])
+    @degree.profile = current_user.profile
 
     respond_to do |format|
       if @degree.save
@@ -57,10 +60,12 @@ class DegreesController < ApplicationController
   # PUT /degrees/1.json
   def update
     @degree = Degree.find(params[:id])
+    @degree.profile = current_user.profile
+    @profile = current_user.profile
 
     respond_to do |format|
       if @degree.update_attributes(params[:degree])
-        format.html { redirect_to @degree, notice: 'Degree was successfully updated.' }
+        format.html { redirect_to @profile, notice: 'Degree was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

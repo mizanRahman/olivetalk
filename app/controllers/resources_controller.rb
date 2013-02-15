@@ -1,6 +1,7 @@
 class ResourcesController < ApplicationController
   # GET /resources
   # GET /resources.json
+  add_breadcrumb "Home", :root_path
   add_breadcrumb :index, :resources_path
   load_and_authorize_resource
 
@@ -52,6 +53,13 @@ class ResourcesController < ApplicationController
   def create
     @resource = Resource.new(params[:resource])
     @resource.user = current_user
+    
+	agent = Mechanize.new
+	page = agent.get(@resource.url)
+	
+	@resource.title = page.title
+	node = page.search("head meta[name='description']")[0]
+	@resource.description = node["content"]
 
     respond_to do |format|
       if @resource.save

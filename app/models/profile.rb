@@ -1,11 +1,13 @@
 class Profile < ActiveRecord::Base
+  geocoded_by :location   # can also be an IP address
+  after_validation :geocode          # auto-fetch coordinates
   belongs_to :user
   has_many :jobs
   has_many :degrees
   attr_accessible :about_me, :blog_url, :city, :conflict, :country, :facebook_url, :first_name, :last_name, :state, :twitter_url, :user_id, :avatar
   mount_uploader :avatar, AvatarUploader
-  
-  
+  acts_as_gmappable
+
   
   def title
   
@@ -16,6 +18,8 @@ class Profile < ActiveRecord::Base
   	
   	@LastDegree = self.degrees.order('end_date DESC').first
   	@LastJob = self.jobs.first
+  	
+  	if (@LastDegree or @LastJob) then
   	  	
   	if (@LastDegree.end_date > Date.today) then
   		return "Student at " + @LastDegree.university.name
@@ -24,6 +28,19 @@ class Profile < ActiveRecord::Base
   	elsif (@LastDegree)
   		return "Graduate of " + @LastDegree.university.name
   	end
+  	
+  	else
+  		return "New Member"
+  	end
+  end
+  
+  def location
+  	return self.city + ", " + self.state + " " + self.country
+  end
+
+  def gmaps4rails_address
+	#describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki
+	"#{self.city}, #{self.state} #{self.country}" 
   end
   
 end

@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
+  add_breadcrumb "Home", :root_path
   add_breadcrumb :index, :topics_path
   load_and_authorize_resource
   

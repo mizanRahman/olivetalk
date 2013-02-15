@@ -7,8 +7,11 @@ class Ability
 		can :manage, :all
 	elsif user.role == "moderator"
 		can :manage, :all
-	elseif user.role == "admin"
+	elsif user.role == "admin"
 		can :manage, :all
+	elsif user.role == ""
+		cannot :manage, :all
+		can :manage, :profile
 	else
 		cannot :manage, :all
 	end
