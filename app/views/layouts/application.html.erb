@@ -22,7 +22,7 @@
     		<li class="divider-vertical"></li>
     		<li class="<%= 'active' if current_page?(resources_path) %>"><%= link_to "Pinboard", resources_path %></li>
     		<li class="divider-vertical"></li>
-     	    <li class="<%= 'active' if current_page?(topics_path) %>"><%= link_to "Community", networks_path %></li>
+     	    <li class="<%= 'active' if current_page?(networks_path) %>"><%= link_to "Community", networks_path %></li>
      	 	<li class="divider-vertical"></li>
      	 	<li><a href="#">Olive University</a></li>
       		<li class="divider-vertical"></li>
@@ -32,7 +32,7 @@
 		<ul class="nav pull-right">
 			<% if user_signed_in? %>
 				<li>
-				<%= if current_user.profile? then
+				<%= if current_user.profile then
 					link_to 'My Profile', profile_path(current_user.profile.id)
 					
 				end %>
@@ -42,7 +42,7 @@
 			  	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> <b class="caret"></b></a>
 				<ul class="dropdown-menu">
 					<li>
-					<%= if current_user.profile? then
+					<%= if current_user.profile then
 						link_to 'Edit profile', edit_profile_path(current_user.profile.id) 
 					end %>
 					</li>
