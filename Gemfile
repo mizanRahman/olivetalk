@@ -21,7 +21,6 @@ group :assets do
 
   gem "therubyracer"
   gem "less-rails"
-  gem 'twitter-bootstrap-rails'
 end
 
 gem 'jquery-rails'
@@ -41,7 +40,7 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
-
+gem 'twitter-bootstrap-rails'
 gem 'devise'
 gem 'bootstrap-sass', '~> 2.2.2.0'
 gem 'simple_form'
