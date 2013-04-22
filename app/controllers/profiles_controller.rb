@@ -25,7 +25,7 @@ class ProfilesController < ApplicationController
    	end
     add_breadcrumb @profile.first_name + " " + @profile.last_name, ""
     
-    @recentposts = Post.where('user_id = ?', @profile.user.id).order('id desc')
+    @recentposts = Post.where('user_id = ?', @profile.id).order('id desc')
 
     respond_to do |format|
       format.html # show.html.erb
@@ -47,14 +47,15 @@ class ProfilesController < ApplicationController
   # GET /profiles/1/edit
   def edit
     @profile = Profile.find_by_user_id(current_user.id)
-	add_breadcrumb "My Profile", profile_path(@profile)
+  	add_breadcrumb "My Profile", profile_path(@profile)
   end
 
   # POST /profiles
   # POST /profiles.json
   def create
     @profile = Profile.new(params[:profile])
-
+    @profile.user_id = current_user.id
+    
     respond_to do |format|
       if @profile.save
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }

@@ -42,7 +42,12 @@ gem 'simple_form'
 gem 'country_select'
 # gem "rmagick"
 gem "mini_magick"
-gem "better_errors", ">= 0.6.0", :group => :development
+
+group :development do
+	gem "better_errors", ">= 0.6.0" 
+	gem "binding_of_caller"
+end
+
 gem "breadcrumbs_on_rails"
 
 gem "carrierwave"
