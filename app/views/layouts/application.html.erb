@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<div class="navbar navbar-fixed-top <% if !user_signed_in? %>navbar-inverse<% end %>">
+<div class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
   	<div class="container">
 	    <a class="brand" href="<%= root_path %>">OliveTalk</a>
@@ -24,8 +24,15 @@
     		<li class="divider-vertical"></li>
      	    <li class="<%= 'active' if current_page?(networks_path) %>"><%= link_to "Community", networks_path %></li>
      	 	<li class="divider-vertical"></li>
-     	 	<li><a href="#">Olive University</a></li>
+     	 	<li><a href="#">Education</a></li>
       		<li class="divider-vertical"></li>
+     	 	<li><a href="#">Alumni</a></li>
+      		<li class="divider-vertical"></li>
+			<% if can? :access, :rails_admin %>
+     	 	<li><a href="/manage">Admin</a></li>
+      		<li class="divider-vertical"></li>
+      		<% end %>
+      		
       		<% end %>
     	</ul>
 		
@@ -66,7 +73,6 @@
 </div>
 
 <div class="container">
-	<%= bootstrap_flash %>
 	<% if can? :read, :home %>
 	<%= render_breadcrumbs %>
 	<% end %>

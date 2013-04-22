@@ -5,7 +5,10 @@ Ot::Application.routes.draw do
 
   mount RailsAdmin::Engine => '/manage', :as => 'rails_admin'
 
-  
+  resources :topics do
+  		resources :posts
+  		resources :resources
+  end
 
   resources :badgeships
   resources :badges
@@ -17,11 +20,11 @@ Ot::Application.routes.draw do
   resources :resources
   resources :networks
   
-  resources :topics do
-  		resources :posts
-  end
+
 
   get 'topics/tag/:tag', to: 'topics#index', as: :topic_tag
+  
+  match 'topics/:id/approve' => 'topics#approve'
 
   get 'resources/tag/:tag', to: 'resources#index', as: :resource_tag
 

@@ -10,8 +10,10 @@ class ResourcesController < ApplicationController
 	if params[:tag]
     	@resources = Resource.tagged_with(params[:tag])
   	else
-   		@resources = Resource.all
+   		@resources = Resource.order("id DESC")
   	end
+  	
+  	@newresource = Resource.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -53,19 +55,25 @@ class ResourcesController < ApplicationController
   def create
     @resource = Resource.new(params[:resource])
     @resource.user = current_user
-    
-	agent = Mechanize.new
-	page = agent.get(@resource.url)
+    if (params.has_key?(:topic_id)) then
+  		@topic = Topic.find(params[:topic_id])
+		@resource.topic = @topic
+	end
+	    
+	#agent = Mechanize.new
+	#page = agent.get(@resource.url)
 	
-	@resource.title = page.title
-	node = page.search("head meta[name='description']")[0]
-	@resource.description = node["content"]
+	#@resource.title = page.title
+	#node = page.search("head meta[name='description']")[0]
+	#@resource.description = node["content"]
 
     respond_to do |format|
       if @resource.save
         format.html { redirect_to resources_url, notice: 'Resource was successfully created.' }
         format.json { render json: @resource, status: :created, location: @resource }
+        format.js
       else
+        format.js
         format.html { render action: "new" }
         format.json { render json: @resource.errors, status: :unprocessable_entity }
       end
@@ -81,7 +89,9 @@ class ResourcesController < ApplicationController
       if @resource.update_attributes(params[:resource])
         format.html { redirect_to resources_url, notice: 'Resource was successfully updated.' }
         format.json { head :no_content }
+        format.js
       else
+        format.js
         format.html { render action: "edit" }
         format.json { render json: @resource.errors, status: :unprocessable_entity }
       end
@@ -92,10 +102,20 @@ class ResourcesController < ApplicationController
   # DELETE /resources/1.json
   def destroy
     @resource = Resource.find(params[:id])
+
+
+	if (@resource.topic_id) then
+		url = topic_url(@resource.topic_id)
+	else
+		url = resources_url
+	end
+	
+	
     @resource.destroy
 
+
     respond_to do |format|
-      format.html { redirect_to resources_url }
+      format.html { redirect_to url }
       format.json { head :no_content }
     end
   end

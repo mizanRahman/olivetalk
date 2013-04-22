@@ -1,24 +1,25 @@
 <% if can? :read, :home %>
 <div class="row">
 <div class="span9">
+
 <% @topicsfeatured.each do |topic| %>
 <div class="hero-unit">
-  <h1><%= topic.name %></h1>
-  <p><%= topic.content %></p>
+  <div style="font-size:12px;font-weight:bold;color:#666;margin-bottom:0px;padding:0px;line-height:12px">QUESTION OF THE WEEK</div>
+  <h1 style="font-size:53px"><%= topic.name %></h1>
+  <p><%= simple_format(truncate(topic.content, :length => 180)) %></p>
   <p>
   	<%= link_to "Post Reply", topic_path(topic), :class => "btn btn-primary btn-large" %>
   </p>
 </div>
 <% end %>
-<ul class="thumbnails">
+<div class="row">
 <% @resources.each do |resource| %>
-
-  <li class="span3">
+  <div class="span3" style="clear:none">
     <div class="thumbnail" style="padding:0px">
     	<div style="padding:10px">
 	      <img data-src="holder.js/300x200" alt="">
-    	  <h3><%= resource.title %></h3>
-      		<p style="color:#ccc;font-size:14px;line-height:14px"><%= resource.description %></p>
+    	  <h5><a href="<%= resource_url(resource) %>" style="color:#000"><%= truncate(resource.title, :length => 70) %></a></h5>
+      		<p style="color:#ccc;font-size:12px;line-height:14px"><%= truncate(resource.description, :length => 125) %></p>
 		</div>
 		<div style="background-color:#eeeeee;padding:10px">
 			<div style="float:left"><%= image_tag resource.user.profile.avatar_url(:tiny) if resource.user.profile.avatar? %></div>
@@ -26,10 +27,10 @@
 			<div style="clear:both"></div>
 		</div>
     </div>
-  </li>
-
+  </div>
 <% end %>
-</ul>
+</div>
+
 
 </div>
 
@@ -37,44 +38,21 @@
 
 
 <h3>Recent Topics</h3>
+<% @recenttopics.each do |topic|   %>
 <div class="media">
-  <a class="pull-left" href="#">
-    <img class="media-object" data-src="holder.js/64x64">
-  </a>
   <div class="media-body">
-    <h5 class="media-heading">The Economic Cost of War</h5>
-    Here's how blah blah
+    <h5 class="media-heading"><%= link_to topic.name, topic_path(topic) %></h5>
+   Created by <%= topic.user.profile.first_name %> <%= topic.user.profile.last_name %><br/><span style="font-size:12px;color:grey"><%= topic.user.profile.title %></span>
   </div>
 </div>
-<div class="media">
-  <a class="pull-left" href="#">
-    <img class="media-object" data-src="holder.js/64x64">
-  </a>
-  <div class="media-body">
-    <h5 class="media-heading">The Economic Cost of War</h5>
-    Here's how blah blah
-  </div>
-</div>
-
-
-
-<h3>Online Members</h3>
-<div class="media">
-  <a class="pull-left" href="#">
-    <img class="media-object" data-src="holder.js/64x64">
-  </a>
-  <div class="media-body">
-    <h5 class="media-heading">Daniel Wehrenfennig</h5>
-    Executive Director of Olive Tree Initiative
-  </div>
-</div>
+<% end %>
 
 </div>
 <% else %>
         <div class="page-header">
             <div class="container">
                 <h1>OliveTalk<span style="position:relative;font-size:14px;top:-74px;left:10px;height:14px;line-height:14px">BETA</span></h1>
-                <p style="font-size:35px">The exclusive conflict analysis platform of the Olive Tree Initiative.</p>
+                <p style="font-size:35px">The exclusive online platform of the Olive Tree Initiative.</p>
 
                 <div class="button-container"><a href="<%= new_user_session_path %>" class="btn">Log In</a></div>
 
@@ -83,11 +61,11 @@
             </div>
         </div>
         
-	<div class="row" style="position:relative;top:500px">
+	<div class="row" style="position:relative;top:490px">
 	
 	<div class="span4">
 		<h4>About the Project</h4>
-		<div style="float:left;padding-top:10px;padding-bottom:10px"><img src="/olive.png" style="height:100px;margin-right:10px;" /></div>
+
 		<p style="color:#888;font-size:12px">OliveTalk is a next-generation, online conflict analysis platform produced through a collaboration between the Centre for New Diplomacy and Olive Tree Initiative. </p>
 		<p style="color:#888;font-size:12px">The platform enables users to connect and discuss, as well as participate in one-of-a-kind direct-engagement opportunities with actors in the Middle East.</p>
 	</div>
@@ -101,7 +79,10 @@
 	
 	<div class="span4">
 		<h4>About the Centre for New Diplomacy</h4>
-		<p></p>
+		<div style="float:left;padding-top:10px;padding-bottom:10px"><img src="https://sphotos-a.xx.fbcdn.net/hphotos-prn1/18989_237085676425673_1233176667_n.png" style="height:100px;margin-right:10px;" /></div>
+		<p style="color:#888;font-size:12px">The Centre for New Diplomacy is a non-profit, non-partisan, non-governmental organization established to provide educational, and relationship building opportunities for key stakeholders from all sides of the Middle East regional conflict. The Centre was founded with the belief that nuanced, informed, and first-hand understanding of the region, leads to the emergence of more realistic and constructive approaches to managing intractable conflict.
+
+</p>
 	</div>
 	
 

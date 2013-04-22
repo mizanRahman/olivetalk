@@ -9,7 +9,7 @@ class TopicsController < ApplicationController
 	if params[:tag]
     	@topics = Topic.tagged_with(params[:tag])
   	else
-   		@topics = Topic.all
+   		@topics = Topic.where('is_approved = ?', true)
   	end
   	
   	@newtopic = Topic.new
@@ -27,6 +27,9 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @posts = @topic.posts
 	@newpost = Post.new
+	@newresource = Resource.new
+	@ownerresources = Resource.where('topic_id = ? and user_id = ?', @topic.id, @topic.user.id)
+	@userresources = Resource.where('topic_id = ? and user_id != ?', @topic.id, @topic.user.id)
 	add_breadcrumb @topic.name
 
     respond_to do |format|
@@ -99,5 +102,12 @@ class TopicsController < ApplicationController
       format.html { redirect_to topics_url }
       format.json { head :no_content }
     end
+  end
+  
+  def approve
+  	@topic = Topic.find(params[:id])
+  	@topic.is_approved = true
+  	@topic.save
+  	redirect_to @topic
   end
 end

@@ -2,11 +2,13 @@ class Profile < ActiveRecord::Base
   geocoded_by :location   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
   belongs_to :user
-  has_many :jobs
-  has_many :degrees
-  attr_accessible :about_me, :blog_url, :city, :conflict, :country, :facebook_url, :first_name, :last_name, :state, :twitter_url, :user_id, :avatar
+  has_many :jobs, :dependent => :destroy
+  has_many :degrees, :dependent => :destroy
+  attr_accessible :about_me, :blog_url, :city, :conflict, :country, :facebook_url, :first_name, :last_name, :state, :twitter_url, :user_id, :avatar, :avatar_cache, :remove_avatar
   mount_uploader :avatar, AvatarUploader
   acts_as_gmappable
+  validates_length_of :about_me, :maximum => 150
+
 
   
   def title
@@ -16,19 +18,18 @@ class Profile < ActiveRecord::Base
   	# IF THERE IS NO CURRENT JOB, FIND IF THERE IS A PAST DEGREE "GRADUATE FROM __"
   	# IF ALL ELSE FAILS, SIMPLY WRITE THE JOIN DATE
   	
-  	@LastDegree = self.degrees.order('end_date DESC').first
+  	@LastDegree = self.degrees.order('graduation_year DESC').first
   	@LastJob = self.jobs.first
   	
   	if (@LastDegree or @LastJob) then
   	  	
-  	if (@LastDegree.end_date > Date.today) then
-  		return "Student at " + @LastDegree.university.name
-  	elsif (@LastJob.is_current)
-  		return @LastJob.position + " at " + @LastJob.organization
-  	elsif (@LastDegree)
-  		return "Graduate of " + @LastDegree.university.name
-  	end
-  	
+	  	if (@LastDegree.is_current) then
+	  		return "Student at " + @LastDegree.university.name
+	  	elsif (@LastJob and @LastJob.is_current)
+	  		return @LastJob.position + " at " + @LastJob.organization
+	  	elsif (@LastDegree)
+	  		return "Graduate of " + @LastDegree.university.name
+	  	end
   	else
   		return "New Member"
   	end

@@ -24,6 +24,8 @@ class ProfilesController < ApplicationController
    		@profile = Profile.find_by_user_id(current_user.id)
    	end
     add_breadcrumb @profile.first_name + " " + @profile.last_name, ""
+    
+    @recentposts = Post.where('user_id = ?', @profile.user.id).order('id desc')
 
     respond_to do |format|
       format.html # show.html.erb

@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_one :profile
-  has_many :badgeships
+  has_one :profile, :dependent => :destroy
+  has_many :badgeships, :dependent => :destroy
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :role
@@ -22,14 +22,8 @@ class User < ActiveRecord::Base
   after_create :create_new_profile
   
   def create_new_profile
-  		self.role = "unapproved"
+  		self.role = "member"
   		self.save
-		@profile = Profile.new
-		@profile.user_id = self.id
-		@profile.city = "Los Angeles"
-		@profile.state = "CA"
-		@profile.country = "United States"
-		@profile.save
   end
 
   def has_profile

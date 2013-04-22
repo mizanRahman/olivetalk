@@ -9,7 +9,7 @@
 
 		<div style="padding:20px;background-color:#fff">
 		
-			<p style="color:#999"><%= @topic.content %></p>
+			<p style="color:#999"><%= simple_format(@topic.content) %></p>
 		
 			<p style="color:#ccc">Posted <%= time_ago_in_words(@topic.created_at) %> ago</p>
 			
@@ -24,12 +24,12 @@
 					
 				<div>
 					<div style="float:left;margin-right:15px">
-						<span class="thumbnail"><%= image_tag current_user.profile.avatar_url(:thumb) if current_user.profile.avatar? %></span>
+						<span class="thumbnail"><%= image_tag post.user.profile.avatar_url(:thumb), :width => 75 %></span>
 					</div>
 					
 					<div style="float:left;width:675px;">
 						<strong><%= link_to (post.user.profile.first_name + " " + post.user.profile.last_name), profile_path(post.user.profile.id) %></a></strong> <span style="color:#999"><%= post.user.profile.title %></span>
-						<div style="font-size:13px;line-height:18px;margin-top:8px"><%= post.content %></div>
+						<div style="font-size:13px;line-height:18px;margin-top:8px"><%= simple_format(post.content) %></div>
 					</div>
 					<div style="clear:both"></div>
 					<div style="color:#999;margin-top:10px;font-size:11px;text-align:right">Posted <%= time_ago_in_words(post.created_at) %> ago</div>
@@ -39,7 +39,11 @@
 					
 			<% end %>
 			
+			<% if @topic.posts.count == 0 %>
+			
 			<div style="text-align:center;color:#888;font-size:18px">Be the first to respond!</div>
+			
+			<% end %>
 
 		
 		</div>
@@ -102,7 +106,7 @@
 			<div id="badgeships">
 			<% @topic.user.badgeships.each do |badgeship| %>
 			
-			<a class="label label-success" rel="popover" title="<%= badgeship.badge.name %>" data-content="<%= badgeship.badge.description %>"><%= badgeship.badge.name %></a>
+			<a href="<%= badge_path(badgeship.badge) %>" class="label label-success" rel="popover" title="<%= badgeship.badge.name %>" data-content="<%= badgeship.badge.description %>"><%= badgeship.badge.name %></a>
 			
 			<% end %>
 			</div>
@@ -111,33 +115,74 @@
 			<hr>
     
 
+			<% if (@ownerresources.count >= 1) then %>
 			
 			<p class="nav-header" style="padding:0px"><%= @topic.user.profile.first_name %> Recommends You Read:</p>
 			
-			<p class="nav-header" style="padding:0px">Other Olives Recommend You Read:</p>
+			<% @ownerresources.each do |resource| %>
+			
+			<div style="font-size:12px;line-height:14px;"><span style="font-weight:bold;font-size:14px"><%= link_to truncate(resource.title, :length => 50), resource_path(resource) %></span><br /><%= resource.comment %><%  if can? :destroy, Resource  %><br /><%= link_to 'Delete', resource, method: :delete, data: { confirm: 'Are you sure?' } %><% end %></div><br />
+			
+			<% end %>
+
 			
 			<hr>
 			
-<a href="#myModal" role="button" class="btn" data-toggle="modal">Add a Resource</a>
+			<% end %>
+			
+			<% if (@userresources.count >= 1) then %>
+			
+			<p class="nav-header" style="padding:0px">Other Olives Recommend You Read:</p>
+			
+			<% @userresources.each do |resource| %>
+			
+			<div style="font-size:12px;line-height:14px;"><span style="font-weight:bold;font-size:14px"><%= link_to truncate(resource.title, :length => 50), resource_path(resource) %> <%  if can? :destroy, Resource  %><%= link_to ' x', resource, method: :delete, data: { confirm: 'Are you sure?' }, style: "float:right" %><% end %></span><br /><%= resource.comment %><br /><span style="color:grey">Posted by <%= link_to (resource.user.profile.first_name + " " + resource.user.profile.last_name), profile_path(resource.user.profile.id) %> <%= time_ago_in_words(resource.created_at) %> ago</span></div><br />
+			
+			<% end %>
+			
+			<hr>
+			
+			<% end %>
+			
+			
+			
+			
+			<div style="padding:20px;text-align:center"><a href="#myModal" role="button" class="btn btn-large" data-toggle="modal">Add a Resource</a></div>
  
 <!-- Modal -->
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="SpecialForm">
+<%= simple_form_for([@topic,@newresource], :html => { :style => "margin:0px" }, remote: true) do |f| %>
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 <h3 id="myModalLabel">Add a Resource</h3>
 </div>
-<div class="modal-body">
-<p>Attach any relevant online resource to this topic to encourage others to review it.</p>
+<div class="modal-body" style="max-height:500px !important">
+<p style="text-align:left;font-size:12px;line-height:14px;color:#555">Resources.</p>
+<hr />
 
-<form action="/update" method="POST">
-    <input id="url" type="text" name="url"/>
-</form>
+  <%= f.error_notification %>
+
+  <div class="form-inputs" style="text-align:left">
+    <%= f.input :url, :input_html => { :style => "width:500px" }, placeholder: "Paste the URL of your resource" %>
+		
+	<%= f.input :comment, :as => :text, :input_html => { :rows => 3, :style => "width:500px" }, placeholder: "Write a few words about the relevance of this resource and why people should check it out." %>
+	
+	<%= f.input :tag_list, :input_html => { :style => "width:500px" }, placeholder: "Include three tags separated by commas (i.e. Syria, Civil War, Intervention)", label: "Tags" %>
+
+
+  </div>
+
+
 </div>
 <div class="modal-footer">
 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-<button class="btn btn-primary">Post</button>
+<button class="btn btn-primary" data-loading-text="Retrieving...">Add a Resource</button>
+</div>
+<% end %>
 </div>
 </div>
+<!-- End Modal -->
 			
 			<hr>
 			

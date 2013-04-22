@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130214205704) do
+ActiveRecord::Schema.define(:version => 20130217023438) do
 
   create_table "badges", :force => true do |t|
     t.string   "name"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20130214205704) do
     t.integer  "priority"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.boolean  "approved"
   end
 
   create_table "badgeships", :force => true do |t|
@@ -37,10 +38,10 @@ ActiveRecord::Schema.define(:version => 20130214205704) do
     t.string   "type_of_degree"
     t.string   "primary_focus"
     t.string   "secondary_focus"
-    t.date     "start_date"
-    t.date     "end_date"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.boolean  "is_current"
+    t.integer  "graduation_year"
   end
 
   add_index "degrees", ["profile_id"], :name => "index_degrees_on_profile_id"

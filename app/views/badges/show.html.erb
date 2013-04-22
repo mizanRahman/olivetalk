@@ -1,20 +1,58 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @badge.name %>
-</p>
+<div class="cool-box" style="overflow:visible">
 
-<p>
-  <b>Description:</b>
-  <%= @badge.description %>
-</p>
+	<div style="float:left;width:70%">
+	
+		<div style="float:left;margin:20px;position:absolute"><div style="border-radius:50%;width:200px;height:200px;background:linear-gradient(#9ca974, #577600) repeat scroll 0 0 transparent;color:#fff;font-size:24px;font-weight:bold;text-align:center;"><div style="padding-top:88px"><%= @badge.name %></div></div></div>
+	
+		<h1 style="padding-left:250px;padding-top:30px;padding-bottom:20px;margin:0px;background-color:#fcfcfc"><%= @badge.name %></h1>		
 
-<p>
-  <b>Priority:</b>
-  <%= @badge.priority %>
-</p>
+		<hr style="margin-top:0px" />
+		
+		<div style="color:#999;font-size:18px;margin-left:250px"><%= @badge.description %></div>
+		
+		<div style="margin-top:100px;">
+		<hr />
+		<% @badge.badgeships.each do |badgeship| %>		
 
+			<div class="span3" style="margin-bottom:20px;width:240px">
 
-<%= link_to 'Edit', edit_badge_path(@badge) %> |
-<%= link_to 'Back', badges_path %>
+			<div style="float:left;margin-right:10px"><%= link_to (image_tag badgeship.user.profile.avatar_url(:thumb), :width => 60), profile_path(badgeship.user.profile.id) %></div>
+			<%= link_to (badgeship.user.profile.first_name.to_s + " " + badgeship.user.profile.last_name.to_s), profile_path(badgeship.user.profile.id) %><br />
+			<span style="color:grey"><%= badgeship.user.profile.title %></span>
+
+			<div style="clear:both"></div>
+
+			</div>
+
+		<% end %>
+		
+		
+		</div>
+		
+		<div style="margin-left:250px;margin-top:15px">
+			
+		</div>
+		
+	
+	</div>
+	
+	<div style="width:30%" class="cool-sidebar">
+
+		<div style="border-left:1px solid #E8E9EB; padding:20px;min-height:210px">
+		
+			<div style="margin-bottom:15px">
+			
+				<a href="#" class="btn btn-primary btn-large">Request this Badge</a>
+			
+			</div>
+		
+			
+		</div>
+	
+	</div>
+	
+	<div style="clear:both"></div>
+
+</div>

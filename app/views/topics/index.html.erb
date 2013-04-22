@@ -2,16 +2,25 @@
 <div style="border-radius:5px;border:1px solid #d9d9d9;position:relative;box-shadow:0 0 2px 0 rgba(0, 0, 0, 0.1);background-color:#fff">
 
 	<div style="width:70%;float:left;">
+	
+
+
 		
 		<div style="padding:20px">
+			<div style="float:left;font-size:20px;color:grey;line-height:28px">
+			
+				<span style="font-weight:bold;font-size:24px;color:#000"><em>Engage</em></span> is a place to discuss and share. Join in on one of the ongoing discussions, or lead a new discussion.
+			<hr />
+			</div>
+			
+			<div style="clear:both;padding-top:20px"></div>
 
-
-
+<% if @topics %>
 
 <% @topics.each do |topic| %>
 <div style="float:left">
 	<div style="font-size:18px;font-weight:bold"><%= link_to topic.name, topic %></div>
-	<div>Created by <%= topic.user.profile.first_name %> <%= topic.user.profile.last_name %></div>
+	<div>Created by <%= link_to topic.user.profile.first_name + " " + topic.user.profile.last_name, profile_path(topic.user.profile) %></div>
 	<% if can? :destroy, topic %>
 	<div>Admin: <%= link_to 'Edit', edit_topic_path(topic) %> <%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></div>
 	<% end %>
@@ -35,11 +44,13 @@
    %>
  <% end %>
   <br /><%= usercount %> olives have posted <%= topic.posts.count %> replies.
+
 </div>
 <div style="clear:both"></div>
 <hr />
 <% end %>
 
+<% end %>
 
 		</div>
 
@@ -53,25 +64,24 @@
  
 <!-- Modal -->
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<%= simple_form_for(@newtopic) do |f| %>
+<%= simple_form_for(@newtopic, :html => { :style => "margin:0px" }) do |f| %>
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-<h3 id="myModalLabel">Lead a Discussion</h3>
+<h3 id="myModalLabel">Start a Discussion</h3>
 </div>
-<div class="modal-body">
-<p>Attach any relevant online resource to this topic to encourage others to review it.</p>
-
+<div class="modal-body" style="max-height:500px !important">
+<p style="text-align:left;font-size:12px;line-height:14px;color:#555">Start a new discussion topic. First, enter the question, description, and a few tags to describe the topic. On the next page, add online resources and readings for others to review. Within several hours, your topic will be reviewed by a moderator and become public to all other members.</p>
+<hr />
 
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :name, :input_html => { :rel => "popover", :title => "test title", :"data-content" => "this is a major test" } %>
+  <div class="form-inputs" style="text-align:left">
+    <%= f.input :name, :input_html => { :rel => "popover", :title => "test title", :"data-content" => "this is a major test", :style => "width:500px" }, placeholder: "Enter a short and descriptive topic i.e. 'The Prospects of a 3rd Intifada'" %>
 		
-	<%= f.input :content, :as => :text, :input_html => { :rows => 8 } %>
+	<%= f.input :content, :as => :text, :input_html => { :rows => 8, :style => "width:500px" }, placeholder: "Enter your discussion question here. Great discussion starters include three things:  1) Background on the issue and its relevance. 2) A thought provoking question that deals with a specific issue. 3) Finally, on the next page, you will be able to upload online resources and readings for others to use." %>
 	
-	<%= f.input :tag_list %>
+	<%= f.input :tag_list, :input_html => { :rows => 8, :style => "width:500px" }, placeholder: "Include three tags separated by commas (i.e. Syria, Civil War, Intervention)", label: "Tags" %>
 
-    <%= f.association :network %>
   </div>
 
 
@@ -100,3 +110,4 @@
 
 
 </div>
+

@@ -1,19 +1,18 @@
 <div class="row">
 <div style="float:left" class="span9">
-<div style="float:left;font-size:20px;color:grey;line-height:28px"><span style="font-weight:bold;font-size:24px;color:#000"><em>Pinboard</em></span> is a place to share valuable news articles, research, and journals related to conflict <br />analysis and resolution. Browse by tag or post a pin to share.</div>
+<div style="float:left;font-size:20px;color:grey;line-height:28px"><span style="font-weight:bold;font-size:24px;color:#000"><em>Pinboard</em></span> is a place to share valuable articles, research, and journals. Browse by tag or share.</div>
 <div style="clear:both;padding-top:20px"></div>
 
 <div class="row">
 <% @resources.each do |resource| %>
 
 
-  <div class="span3" style="clear:none">
-    <div class="thumbnail" style="padding:0px">
-    	<div style="padding:10px">
+  <div class="span3" style="clear:none;">
+    <div class="thumbnail" style="padding:0px;margin-bottom:25px;height:195px;background-color:#eee">
+    	<div style="padding:10px;background-color:#fff">
 	      <img data-src="holder.js/300x200" alt="">
-    	  <h5><%= truncate(resource.title, :length => 70) %></h5>
+    	  <h5><a href="<%= resource_url(resource) %>" style="color:#000"><%= truncate(resource.title, :length => 70) %></a></h5>
       		<p style="color:#ccc;font-size:12px;line-height:14px"><%= truncate(resource.description, :length => 125) %></p>
-      		<p><%= link_to 'Show', resource %> - <%= link_to 'Edit', edit_resource_path(resource) %> - <%= link_to 'Destroy', resource, method: :delete, data: { confirm: 'Are you sure?' } %></p>
 		</div>
 		<div style="background-color:#eeeeee;padding:10px">
 			<div style="float:left"><%= image_tag resource.user.profile.avatar_url(:tiny) if resource.user.profile.avatar? %></div>
@@ -24,13 +23,50 @@
   </div>
 
 <% end %>
+
+
 </div>
 
 </div>
 
 <div style="float:right;" class="span3">
 
-	<a class="btn btn-primary btn-large" href="#" style="width:230px;margin-bottom:10px;"><i class="icon-map-marker icon-white"></i> Add a Pin</a>
+			<a href="#myModal" role="button" class="btn btn-large btn-primary" data-toggle="modal">Add a Resource</a><br /><br />
+ 
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="SpecialForm">
+<%= simple_form_for(@newresource, :html => { :style => "margin:0px" }, remote: true) do |f| %>
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+<h3 id="myModalLabel">Add a Resource</h3>
+</div>
+<div class="modal-body" style="max-height:500px !important">
+<p style="text-align:left;font-size:12px;line-height:14px;color:#555">Resources.</p>
+<hr />
+
+  <%= f.error_notification %>
+
+  <div class="form-inputs" style="text-align:left">
+    <%= f.input :url, :input_html => { :style => "width:500px" }, placeholder: "Paste the URL of your resource" %>
+		
+	<%= f.input :comment, :as => :text, :input_html => { :rows => 3, :style => "width:500px" }, placeholder: "Write a few words about the relevance of this resource and why people should check it out." %>
+	
+	<%= f.input :tag_list, :input_html => { :style => "width:500px" }, placeholder: "Include three tags separated by commas (i.e. Syria, Civil War, Intervention)", label: "Tags" %>
+
+
+  </div>
+
+
+</div>
+<div class="modal-footer">
+<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+<button class="btn btn-primary" data-loading-text="Retrieving...">Add a Resource</button>
+</div>
+<% end %>
+</div>
+</div>
+<!-- End Modal -->
 	
 	<div style="background-color:#F7F7F7;border-radius:5px;border:1px solid #d9d9d9">
 	
@@ -54,8 +90,5 @@
 <div style="clear:both"></div>
 
 
-<br />
-
-<%= link_to 'New Resource', new_resource_path %>
 
 </div>

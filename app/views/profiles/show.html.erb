@@ -17,16 +17,44 @@
 		<div style="margin-left:250px;margin-top:15px">
 			<% @profile.user.badgeships.each do |badgeship| %>
 			
-			<a class="label label-success" rel="popover" title="<%= badgeship.badge.name %>" data-content="<%= badgeship.badge.description %>"><%= badgeship.badge.name %></a>
+			<a href="<%= badge_url(badgeship.badge) %>" class="label label-success" rel="popover" title="<%= badgeship.badge.name %>" data-content="<%= badgeship.badge.description %>"><%= badgeship.badge.name %></a>
 			
 			<% end %>
+		</div>
+		<div style="clear:both"></div>
+		<div style="margin-top:30px;clear:both">
+		<div class="span6"><h4>Recent Posts</h4></div>
+				<% @recentposts.each do |post| %>
+		
+			<div class='span6' style="margin-bottom:15px;clear:both">
+				<%= @profile.first_name %> posted in <%= link_to post.topic.name, topic_path(post.topic.id) %> <%= time_ago_in_words(post.created_at) %> ago<br />
+				 <div style="color:grey;font-size:14px;background:#f4f4f4;padding:10px;border-radius:5px;margin-top:10px"><%= truncate(post.content, :length => 240) %></div>
+			
+			</div>
+			
+			
+		<% end %>
+		
 		</div>
 	
 	</div>
 	
 	<div style="width:30%" class="cool-sidebar">
 
-		<div style="border-left:1px solid #E8E9EB; padding:20px;">
+		<div style="border-left:1px solid #E8E9EB; padding:20px;min-height:210px">
+		
+			<div style="margin-bottom:15px">
+			
+				<a href="#" class="btn">Send Message</a>
+				
+				<% if (@profile.facebook_url != "") then %>
+						<div style="float:right"><%= link_to (image_tag 'images/fb.jpg', :style => "height:30px"), @profile.facebook_url %></div>
+				<%	end %>
+				
+			
+			</div>
+			
+			<hr />
 		
 			<div>
 				<strong>Location</strong> 
@@ -34,38 +62,44 @@
 				<hr />
 			</div>
 			
+			
+			<% if @profile.degrees.count >= 1 %>
 			<div style="margin-top:10px;line-height:14px">
 				<strong>Degrees</strong>
 				<% @profile.degrees.each do |degree| %>
 				  <br /><br /><span style="font-size:12px">
-					<%= degree.university.name %> - <%= degree.end_date.year %><br />
+					<%= degree.university.name %> - Class of <%= degree.graduation_year %><br />
 					<%= degree.type_of_degree %> in <%= degree.primary_focus %>
 				  </span>
 				<% end %>
 				<hr />
 			</div>
+			<% end %>
+			
+			<% if @profile.jobs.count >= 1 %>
+			<div style="margin-top:10px;line-height:14px">
+				<strong>Jobs</strong>
+				<% @profile.jobs.each do |job| %>
+				  <br /><br /><span style="font-size:12px">
+					<%= job.position %><br /><%= job.organization %> (<%= job.start_date.year %> -
+					<%= if(job.is_current) then
+						"current"
+					else
+						job.end_date.year
+					end %>)<br />
+					<%= job.description %>
+				  </span>
+				<% end %>
+				<hr />
+			</div>
+			<% end %>
 			
 
 <p>
+	<% if @profile.conflict != "" %>
   <b>Conflict:</b>
   <%= @profile.conflict %>
-</p>
-
-
-
-<p>
-  <b>Blog url:</b>
-  <%= @profile.blog_url %>
-</p>
-
-<p>
-  <b>Facebook url:</b>
-  <%= @profile.facebook_url %>
-</p>
-
-<p>
-  <b>Twitter url:</b>
-  <%= @profile.twitter_url %>
+  <% end %>
 </p>
 
 		</div>

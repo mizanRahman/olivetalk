@@ -1,6 +1,30 @@
 
+				<div style="font-size:24px;margin-bottom:15px"><span style="font-weight:bold;font-size:24px;color:#000"><em>Explore</em></span> the OTI community all over the world.</div>
 
 
 <%= gmaps4rails(@json) %>
 
 
+<div class="row" style="margin-top:20px">
+
+
+
+<% @profiles.each do |profile| %>
+
+<% if profile.first_name and profile.last_name %>
+
+<div class="span3" style="margin-bottom:20px">
+
+<div style="float:left;margin-right:10px"><%= link_to (image_tag profile.avatar_url(:thumb), :width => 60), profile_path(profile) %></div>
+<%= link_to (profile.first_name.to_s + " " + profile.last_name.to_s), profile_path(profile) %><br />
+<span style="color:grey"><%= profile.title %></span>
+
+<div style="clear:both"></div>
+
+</div>
+
+<% end %>
+
+<% end %>
+
+</div>
