@@ -44,6 +44,7 @@ gem 'country_select'
 gem "mini_magick"
 
 group :development do
+	# gem "thin"
 	gem "better_errors", ">= 0.6.0" 
 	gem "binding_of_caller"
 end
@@ -58,3 +59,12 @@ gem 'cancan'
 gem 'gmaps4rails'
 gem 'geocoder'
 gem 'mechanize'
+
+#Refinery
+git 'git://github.com/resolve/refinerycms.git' do
+  gem 'refinerycms-core' #You can leave this out if you like. It's a dependency of the other engines.
+  gem 'refinerycms-dashboard'
+  gem 'refinerycms-images'
+  gem 'refinerycms-pages'
+  gem 'refinerycms-resources'
+end

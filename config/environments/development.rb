@@ -14,7 +14,9 @@ Ot::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  if config.respond_to?(:action_mailer)
+    config.action_mailer.raise_delivery_errors = false
+  end
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -36,6 +38,8 @@ Ot::Application.configure do
   config.assets.debug = true
   
   #Added for devise
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  if config.respond_to?(:action_mailer)
+    config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  end
 
 end
