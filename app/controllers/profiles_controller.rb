@@ -4,11 +4,11 @@ class ProfilesController < ApplicationController
   add_breadcrumb "Home", :root_path
 
   add_breadcrumb "Community", "/community"
-
+  # load_and_authorize_resource
   
   def index
     @profiles = Profile.all
-
+    authorize! :read, @profiles
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @profiles }
@@ -23,6 +23,8 @@ class ProfilesController < ApplicationController
    	else
    		@profile = Profile.find_by_user_id(current_user.id)
    	end
+    authorize! :read, @profile
+
     add_breadcrumb @profile.first_name + " " + @profile.last_name, ""
     
     @recentposts = Post.where('user_id = ?', @profile.user.id).order('id desc')

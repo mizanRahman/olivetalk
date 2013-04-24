@@ -59,8 +59,11 @@ class User < ActiveRecord::Base
     if valid?
       # first we need to save user
       save
+      add_role(:member)
+
       # add refinery role
       add_role(:refinery)
+
       # add superuser role
       add_role(:superuser) if ::Role[:refinery].users.count == 1
       # add plugins
