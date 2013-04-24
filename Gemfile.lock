@@ -121,7 +121,7 @@ GEM
       paper_trail (~> 2)
     gmaps4rails (1.5.6)
     haml (3.1.8)
-    hashie (2.0.3)
+    hashie (2.0.4)
     hike (1.2.2)
     httpauth (0.2.0)
     i18n (0.6.4)

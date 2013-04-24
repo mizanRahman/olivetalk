@@ -1,0 +1,164 @@
+@import "twitter/bootstrap/bootstrap";
+
+body { padding-top:80px }
+
+@import "twitter/bootstrap/responsive";
+
+// Set the correct sprite paths
+@iconSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings");
+@iconWhiteSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings-white");
+
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+// Note: If you use asset_path() here, your compiled bootstrap_and_overrides.css will not
+//       have the proper paths. So for now we use the absolute path.
+@fontAwesomeEotPath: asset-path("fontawesome-webfont.eot");
+@fontAwesomeEotPath_iefix: asset-path("fontawesome-webfont.eot#iefix");
+@fontAwesomeWoffPath: asset-path("fontawesome-webfont.woff");
+@fontAwesomeTtfPath: asset-path("fontawesome-webfont.ttf");
+@fontAwesomeSvgPath: asset-path("fontawesome-webfont.svg");
+
+// Font Awesome
+@import "fontawesome";
+
+// Glyphicons
+//@import "twitter/bootstrap/sprites.less";
+
+// Your custom LESS stylesheets goes here
+//
+// Since bootstrap was imported above you have access to its mixins which
+// you may use and inherit here
+//
+// If you'd like to override bootstrap's own variables, you can do so here as well
+// See http://twitter.github.com/bootstrap/customize.html#variables for their names and documentation
+//
+// Example:
+// @linkColor: #ff0000;
+
+@navbarHeight: 60px;
+
+.navbar .divider-vertical { margin:0px }
+
+.navbar .brand { font-size:28px }
+
+.cool-box { min-height:250px;border-radius:5px;border:1px solid #d9d9d9;position:relative;box-shadow:0 0 2px 0 rgba(0, 0, 0, 0.1);background-color:#fff }
+
+.cool-sidebar { background-color:#fcfcfc;height:100%;min-height:100%;float:right;border-top-right-radius:5px;border-bottom-right-radius:5px;position:static;right:0px }
+
+
+
+.page-header {
+    background: linear-gradient(#9ca974, #577600) repeat scroll 0 0 transparent;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2) inset, 0 -3px 7px rgba(0, 0, 0, 0.2) inset;
+    color: #FFFFFF;
+    font-size: 40px;
+    line-height: 56px;
+    margin: 0;
+    padding: 80px 0;
+    position: relative;
+    text-align: center;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.66);
+    position:absolute;
+    left:0;
+    top: 60px;
+    width:100%;
+    
+}
+.page-header h1 {
+    font-size: 120px;
+    line-height: 120px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.66);
+}
+.button-container {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.2);
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15) inset;
+    display: inline-block;
+    margin-top: 40px;
+    padding: 10px;
+}
+
+.page-header .btn {
+    background-color: #000;
+    background-image: linear-gradient(#333, #000);
+    border-color: #000;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.66), 0 1px 0 rgba(255, 255, 255, 0.33) inset;
+    color: #FFFFFF;
+    font-size: 32px;
+    line-height: 32px;
+    padding: 20px 40px;
+    text-shadow: 0 2px 1px rgba(0, 0, 0, 0.4);
+}
+.page-header .btn:hover {
+    background-color: #333;
+    background-image: linear-gradient(#666, #333);
+    border-color: #000;
+}
+.page-header .btn:active {
+    background: none repeat scroll 0 0 #333;
+    border-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15), 0 3px 7px rgba(0, 0, 0, 0.4) inset;
+    padding-bottom: 18px;
+    padding-top: 22px;
+}
+
+#map img { 
+  max-width: none;
+}
+#map label { 
+  width: auto; display:inline; 
+} 
+
+.map_container { width:99% !important;height:500px !important }
+
+#map { width:100% !important;height:500px !important }
+
+input, textarea, .uneditable-input { width:250px; }
+
+.pagination {
+  background: white;
+  cursor: default;
+  height: 22px;
+  a, span, em {
+    padding: 0.2em 0.5em;
+    display: block;
+    float: left;
+    margin-right: 1px;
+  }
+  .disabled {
+    display: none;
+  }
+  .current {
+    font-style: normal;
+    font-weight: bold;
+    background: #2e6ab1;
+    color: white;
+    border: 1px solid #2e6ab1;
+  }
+  a {
+    text-decoration: none;
+    color: #105cb6;
+    border: 1px solid #9aafe5;
+    &:hover, &:focus {
+      color: #000033;
+      border-color: #000033;
+    }
+  }
+  .page_info {
+    background: #2e6ab1;
+    color: white;
+    padding: 0.4em 0.6em;
+    width: 22em;
+    margin-bottom: 0.3em;
+    text-align: center;
+    b {
+      color: #000033;
+      background: #2e6ab1 + 60;
+      padding: 0.1em 0.25em;
+    }
+  }
+}
+
+
+
+
