@@ -24,7 +24,7 @@
     <td><%= job.is_current %></td>
     <td><%= job.profile %></td>
     <td><%= link_to 'Show', job %></td>
-    <td><%= link_to 'Edit', edit_job_path(job) %></td>
+    <td><%= link_to 'Edit', edit_profile_job_path(job) %></td>
     <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
@@ -32,4 +32,4 @@
 
 <br />
 
-<%= link_to 'New Job', new_job_path %>
+<%= link_to 'New Job', new_profile_job_path %>

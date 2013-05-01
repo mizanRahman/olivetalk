@@ -3,18 +3,19 @@ class TopicsController < ApplicationController
   # GET /topics.json
   add_breadcrumb "Home", :root_path
   add_breadcrumb :index, :topics_path
-  load_and_authorize_resource
+
+  load_and_authorize_resource :except => :index
   
   def index
-	if params[:tag]
+
+	  if params[:tag]
     	@topics = Topic.tagged_with(params[:tag])
   	else
    		@topics = Topic.where('is_approved = ?', true)
   	end
-  	
+    authorize! :read, @topics
+
   	@newtopic = Topic.new
-
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @topics }
@@ -24,7 +25,9 @@ class TopicsController < ApplicationController
   # GET /topics/1
   # GET /topics/1.json
   def show
-    @topic = Topic.find(params[:id])
+    # @topic = Topic.find(params[:id])
+    # authorize! :read, @topics
+
     @posts = @topic.posts
 	@newpost = Post.new
 	@newresource = Resource.new
@@ -42,7 +45,9 @@ class TopicsController < ApplicationController
   # GET /topics/new.json
   def new
   	add_breadcrumb :new, :topics_path
-    @topic = Topic.new
+    # @topic = Topic.new
+    # authorize! :manage, @topics
+
     
     respond_to do |format|
       format.html # new.html.erb
@@ -52,13 +57,17 @@ class TopicsController < ApplicationController
 
   # GET /topics/1/edit
   def edit
-    @topic = Topic.find(params[:id])
+    # @topic = Topic.find(params[:id])
+    # authorize! :manage, @topics
+
   end
 
   # POST /topics
   # POST /topics.json
   def create
-    @topic = Topic.new(params[:topic])
+    # @topic = Topic.new(params[:topic])
+    # authorize! :create, @topics
+
     
     @topic.user_id = current_user.id
     @topic.last_poster_id = current_user.id
@@ -79,7 +88,9 @@ class TopicsController < ApplicationController
   # PUT /topics/1
   # PUT /topics/1.json
   def update
-    @topic = Topic.find(params[:id])
+    # @topic = Topic.find(params[:id])
+    # authorize! :manage, @topics
+
 
     respond_to do |format|
       if @topic.update_attributes(params[:topic])
@@ -95,7 +106,9 @@ class TopicsController < ApplicationController
   # DELETE /topics/1
   # DELETE /topics/1.json
   def destroy
-    @topic = Topic.find(params[:id])
+    # @topic = Topic.find(params[:id])
+    # authorize! :manage, @topics
+
     @topic.destroy
 
     respond_to do |format|

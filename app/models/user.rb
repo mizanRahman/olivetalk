@@ -17,6 +17,13 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :plugins
+
+  attr_accessible :approved
+
+  def is_approaved?
+    self.approved
+  end
+
   # attr_accessible :title, :body
   def plugins=(plugin_names)
     if persisted? # don't add plugins when the user_id is nil.
@@ -78,8 +85,8 @@ class User < ActiveRecord::Base
   after_create :create_new_profile
   
   def create_new_profile
-  		self.role = "member"
-  		self.save
+  		# self.role = "member"
+  		# self.save
   end
 
   def has_profile

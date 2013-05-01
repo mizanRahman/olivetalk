@@ -1,3 +1,4 @@
+    <% @profile=current_user.profile %>
     <ul class="nav nav-tabs">
     <li class="<%= 'active' if current_page?(edit_profile_path(@profile)) %>">
     	<%= link_to "Edit Profile", edit_profile_path(@profile) %>

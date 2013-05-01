@@ -11,9 +11,10 @@ gem 'pg'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
+  gem 'execjs'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  # gem "therubyracer"
+  gem "therubyracer"
 end
 
 gem 'jquery-rails'
@@ -33,9 +34,9 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
-# gem "less-rails"
+gem "less-rails"
 gem 'sass-rails',   '~> 3.2.3'
-# gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails'
 gem 'devise'
 gem 'bootstrap-sass', '~> 2.2.2.0'
 gem 'simple_form'
@@ -44,8 +45,8 @@ gem 'country_select'
 gem "mini_magick"
 
 group :development do
-	# gem "thin"
-	gem "better_errors", ">= 0.6.0" 
+	gem "thin"
+	# gem "better_errors", ">= 0.6.0" 
 	gem "binding_of_caller"
 end
 

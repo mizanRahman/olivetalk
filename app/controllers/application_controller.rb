@@ -13,7 +13,8 @@ class ApplicationController < ActionController::Base
   end
   
  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to '/', :alert => exception.message
+    flash[:error] = "Access denied."
+    redirect_to '/'#, :alert => exception.message
   end
 
 end

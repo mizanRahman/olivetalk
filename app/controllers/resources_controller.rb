@@ -3,7 +3,14 @@ class ResourcesController < ApplicationController
   # GET /resources.json
   add_breadcrumb "Home", :root_path
   add_breadcrumb :index, :resources_path
+  
   load_and_authorize_resource
+  
+  # load_and_authorize_resource :topic
+  # load_and_authorize_resource :through => :topic
+
+  # skip_authorize_resource :only => :show  #[:index, :show]
+  # skip_authorize_resource :topic, :only => :show #[:index, :show]
 
     
   def index

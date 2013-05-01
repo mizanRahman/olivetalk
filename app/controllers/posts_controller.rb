@@ -2,6 +2,14 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   before_filter :load_topic
+
+  load_and_authorize_resource :topic
+  load_and_authorize_resource :through => :topic
+
+  skip_authorize_resource :only => :show  
+  skip_authorize_resource :topic, :only => :show
+
+
   
   def index
     @posts = @topic.posts.all

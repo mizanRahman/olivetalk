@@ -13,8 +13,8 @@ Ot::Application.routes.draw do
   resources :badgeships
   resources :badges
   resources :profiles do
-	resources :jobs
-	resources :degrees
+	 resources :jobs
+	 resources :degrees
   end
   resources :universities
   resources :resources

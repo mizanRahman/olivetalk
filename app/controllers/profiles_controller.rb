@@ -5,10 +5,11 @@ class ProfilesController < ApplicationController
 
   add_breadcrumb "Community", "/community"
   # load_and_authorize_resource
+  load_and_authorize_resource :only => [:index, :new, :edit, :destroy]
   
   def index
-    @profiles = Profile.all
-    authorize! :read, @profiles
+    # @profiles = Profile.all
+    # authorize! :read, @profiles
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @profiles }
@@ -23,7 +24,7 @@ class ProfilesController < ApplicationController
    	else
    		@profile = Profile.find_by_user_id(current_user.id)
    	end
-    authorize! :read, @profile
+    # authorize! :show, @profile
 
     add_breadcrumb @profile.first_name + " " + @profile.last_name, ""
     
@@ -38,8 +39,9 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   # GET /profiles/new.json
   def new
-    @profile = Profile.new
-
+    # @profile = Profile.new
+    # authorize! :new, @profile
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @profile }
@@ -48,7 +50,9 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
-    @profile = Profile.find_by_user_id(current_user.id)
+    # @profile = Profile.find_by_user_id(current_user.id)
+    # authorize! :edit, @profile
+
   	add_breadcrumb "My Profile", profile_path(@profile)
   end
 
@@ -57,6 +61,7 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(params[:profile])
     @profile.user_id = current_user.id
+    authorize! :create, @profile
     
     respond_to do |format|
       if @profile.save
@@ -73,6 +78,7 @@ class ProfilesController < ApplicationController
   # PUT /profiles/1.json
   def update
     @profile = Profile.find_by_user_id(current_user.id)
+    authorize! :update, @profile
 
     respond_to do |format|
       if @profile.update_attributes(params[:profile])
@@ -88,7 +94,9 @@ class ProfilesController < ApplicationController
   # DELETE /profiles/1
   # DELETE /profiles/1.json
   def destroy
-    @profile = Profile.find(params[:id])
+    # @profile = Profile.find(params[:id])
+    # authorize! :destroy, @profile
+
     @profile.destroy
 
     respond_to do |format|
