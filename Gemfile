@@ -47,7 +47,9 @@ gem "mini_magick"
 group :development do
 	gem "thin"
 	# gem "better_errors", ">= 0.6.0" 
-	gem "binding_of_caller"
+	# gem "binding_of_caller"
+  gem 'taps'
+  gem 'sqlite3'
 end
 
 gem "breadcrumbs_on_rails"
