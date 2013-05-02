@@ -1,3 +1,19 @@
+==Welcome  to olivetalk
+
+hosted: pure-lowlands-6816
+
+--heroku commands:
+
+
+*heroku run rake db:migrate --app pure-lowlands-6816
+
+
+
+
+
+
+
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create
