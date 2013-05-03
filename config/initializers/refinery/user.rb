@@ -22,15 +22,15 @@
 
   # This just defines the devise method for after sign in to support
   # extension namespace isolation...
-  def after_sign_in_path_for(resource_or_scope)
-    scope = Devise::Mapping.find_scope!(resource_or_scope)
-    home_path = "#{scope}_root_path"
-    respond_to?(home_path, true) ? refinery.send(home_path) : refinery.admin_root_path
-  end
+  # def after_sign_in_path_for(resource_or_scope)
+  #   scope = Devise::Mapping.find_scope!(resource_or_scope)
+  #   home_path = "#{scope}_root_path"
+  #   respond_to?(home_path, true) ? refinery.send(home_path) : refinery.admin_root_path
+  # end
 
-  def after_sign_out_path_for(resource_or_scope)
-    refinery.root_path
-  end
+  # def after_sign_out_path_for(resource_or_scope)
+  #   refinery.root_path
+  # end
 
   def refinery_user?
     refinery_user_signed_in? && current_refinery_user.has_role?(:refinery)

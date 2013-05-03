@@ -18,7 +18,7 @@ Role.create(:title => 'Moderator')
 Role.create(:title => 'Member')
 
 
-User.create(:email=>'oliveadmin@gmail.com', :password=>'olivepass')  ##creating first user
+user1 = User.create(:email=>'oliveadmin@gmail.com', :password=>'olivepass')  ##creating first user
 user2 = User.create(:email=>'olivemoderator@gmail.com', :password=>'olivepass')  ##creating first user
 user3 = User.create(:email=>'olivemember@gmail.com', :password=>'olivepass')  ##creating first user
 user4 = User.create(:email=>'olivenewbe@gmail.com', :password=>'olivepass')  ##creating first user
@@ -26,11 +26,11 @@ user4 = User.create(:email=>'olivenewbe@gmail.com', :password=>'olivepass')  ##c
 
 #Assign user roles
 
-user = User.first
-user.roles << Role.find_by_title('Refinery')
-user.roles << Role.find_by_title('Superuser')
-user.roles << Role.find_by_title('Admin')
-user.save
+# user = User.first
+user1.roles << Role.find_by_title('Refinery')
+user1.roles << Role.find_by_title('Superuser')
+user1.roles << Role.find_by_title('Admin')
+user1.save
 
 # user = User.find_by_email('olivemoderator@gmail.com')
 user2.roles << Role.find_by_title('Moderator')
