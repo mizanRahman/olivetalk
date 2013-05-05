@@ -1,17 +1,17 @@
 ==Welcome  to olivetalk
 
-hosted: pure-lowlands-6816
 
---heroku commands:
+--heroku deploy
 
-
-*heroku run rake db:migrate --app pure-lowlands-6816
-
-
-
-
-
-
+'''
+#app-name: sleepy-savannah-4631
+git remote -v
+git add .
+git commit -m "updated"
+git push heroku master
+heroku run rake db:migrate
+heroku run rake db:seed
+'''
 
 
 == Welcome to Rails

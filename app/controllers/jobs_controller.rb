@@ -1,7 +1,8 @@
 class JobsController < ApplicationController
 
-  load_and_authorize_resource :profile
-  load_and_authorize_resource :through => :profile
+  # load_and_authorize_resource :profile
+  # load_and_authorize_resource :through => :profile
+  load_resource
 
 
   # GET /jobs
