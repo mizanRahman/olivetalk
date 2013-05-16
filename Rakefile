@@ -33,12 +33,13 @@ task :deploy_heroku => [:commit] do
 end
 
 desc "push to all remotes"
-task :push =>[:commit]do
-    puts "Pushing to remotes"
+task :push =>[:commit] do
+    puts "Pushing Source code to remote repositories"
     remote_repos.each do |key,remote|
+    	puts "Pushing to #{key}"
     	system "git push #{remote} master"
 	end
-    puts "Github Pages deploy complete"
+    puts "Remote push complete"
 end
 
 
