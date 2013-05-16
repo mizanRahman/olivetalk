@@ -1,7 +1,7 @@
 ==Welcome  to olivetalk
 
 
---heroku deploy
+===heroku deploy
 
   #app-name: sleepy-savannah-4631
   git remote -v
@@ -11,7 +11,7 @@
   heroku run rake db:migrate
   heroku run rake db:seed
 
----test usernames
+===test usernames
 
   users:
 
@@ -22,7 +22,7 @@
 
   password: olivepass
 
---bitbucket
+===bitbucket
   
   git remote add origin https://mrahmankhan@bitbucket.org/mrahmankhan/olivetalk.git
   git push origin master
