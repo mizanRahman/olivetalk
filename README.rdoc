@@ -3,15 +3,31 @@
 
 --heroku deploy
 
-'''
-#app-name: sleepy-savannah-4631
-git remote -v
-git add .
-git commit -m "updated"
-git push heroku master
-heroku run rake db:migrate
-heroku run rake db:seed
-'''
+  #app-name: sleepy-savannah-4631
+  git remote -v
+  git add .
+  git commit -m "updated"
+  git push heroku master
+  heroku run rake db:migrate
+  heroku run rake db:seed
+
+---test usernames
+
+  users:
+
+  oliveadmin@gmail.com
+  olivemoderator@gmail.com
+  olivemember@gmail.com
+  olivenewbe@gmail.com  
+
+  password: olivepass
+
+--bitbucket
+  
+  git remote add origin https://mrahmankhan@bitbucket.org/mrahmankhan/olivetalk.git
+  git push origin master
+
+
 
 
 == Welcome to Rails
