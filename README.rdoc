@@ -11,12 +11,12 @@
   heroku run rake db:migrate
   heroku run rake db:seed
 
-===test usernames
+===test users
 
-  oliveadmin@gmail.com
-  olivemoderator@gmail.com
-  olivemember@gmail.com
-  olivenewbe@gmail.com  
+*  oliveadmin@gmail.com
+*  olivemoderator@gmail.com
+*  olivemember@gmail.com
+*  olivenewbe@gmail.com  
 
 ===bitbucket
   

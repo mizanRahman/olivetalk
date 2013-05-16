@@ -6,17 +6,17 @@ require File.expand_path('../config/application', __FILE__)
 
 Ot::Application.load_tasks
 
-remotes = {
+remote_repos = {
 	"github" => "github", 
-	"bitbucket" => "origin", 
-	"heroku" => "heroku"
+	"bitbucket" => "origin"
 }
 
+deploy_remotes = {'heroku'=>"heroku"}
 
 
 
 desc "commit and push to all remotes "
-task :deploy => [:commit,:push]do
+task :deploy => [:push, :deploy_heroku]do
 
 	puts "deployment completed."
 
@@ -27,16 +27,16 @@ desc "deploy to heroku only"
 task :deploy_heroku => [:commit] do
 
     puts "deploying to heroku"
-    system "git push #{remotes['heroku']} master"
+    system "git push #{deploy_remotes['heroku']} master"
     puts "Github Pages deploy complete"
 
 end
 
 desc "push to all remotes"
-task :push do
+task :push =>[:commit]do
     puts "Pushing to remotes"
-    remotes.each do |key,remote|
-    	puts "git push #{remote} master"
+    remote_repos.each do |key,remote|
+    	system "git push #{remote} master"
 	end
     puts "Github Pages deploy complete"
 end
