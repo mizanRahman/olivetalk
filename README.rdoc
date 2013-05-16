@@ -20,7 +20,6 @@
   olivemember@gmail.com
   olivenewbe@gmail.com  
 
-  password: olivepass
 
 ===bitbucket
   
