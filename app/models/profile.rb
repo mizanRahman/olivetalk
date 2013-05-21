@@ -8,8 +8,8 @@ class Profile < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   acts_as_gmappable
   validates_length_of :about_me, :maximum => 150
-
-
+  
+  validates :avatar, :presence => {:message => 'You must have to provide a photo.'}
   
   def title
   
