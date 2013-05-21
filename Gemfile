@@ -41,8 +41,8 @@ gem 'devise'
 gem 'bootstrap-sass', '~> 2.2.2.0'
 gem 'simple_form'
 gem 'country_select'
-# gem "rmagick"
-gem "mini_magick"
+gem "rmagick"
+# gem "mini_magick"
 
 group :development do
 	# gem "thin"
