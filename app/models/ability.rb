@@ -14,6 +14,7 @@ class Ability
 		can :destroy, :all
 		can :create, :all
 		can :approve, Topic
+		cannot :update, Role
 	elsif user.has_role?(:member)
 		can :read, Topic, :is_approved => true
 		can :create, [Topic, Post, Profile]
@@ -21,6 +22,7 @@ class Ability
 		can [:update], Profile do |profile|  
 	        profile.try(:user) == user
 	    end
+		cannot :update, Role
 
 		# can :destroy, [Post, Resource], :user_id => current_user.id
 	elsif user.roles.empty?
@@ -29,6 +31,8 @@ class Ability
 		can [:update], Profile do |profile|  
 	        profile.try(:user) == user
 	    end
+		cannot :update, Role
+	    
 	else
 		cannot :manage, :all
 		# can :manage, Profile
