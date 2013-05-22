@@ -45,9 +45,9 @@ gem "rmagick"
 # gem "mini_magick"
 
 group :development do
-	# gem "thin"
-	# gem "better_errors", ">= 0.6.0" 
-	# gem "binding_of_caller"
+	gem "thin"
+	gem "better_errors", ">= 0.6.0" 
+	gem "binding_of_caller"
   gem 'taps'
   gem 'sqlite3'
 end

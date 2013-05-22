@@ -58,43 +58,16 @@ users << User.create(:email=>"coreyfeinstein@gmail.com", :password=>'olivepass')
 users.each do |user|
 
 	user.roles << Role.find_by_title('Member')
+	user.save
 	puts "user inserted with member role: #{user.email} "
 	
 end
 
-
-
-  # attr_accessible :blog_url, :city, :conflict, :country, :facebook_url,  :state, :twitter_url, :user_id, :avatar, :avatar_cache, :remove_avatar
-
-puts 'inserting profile'
-
-profiles = []
-
-Profile.create(:first_name=>'Isaac',
-	:last_name=>'Yerushalmi',
-	:about_me=>'I am a founding member of the original Olive Tree Initiative, and currently serve as the Executive Director of the Centre for New Diplomacy.',
-	:facebook_url=>'https://www.facebook.com/isaac.yerushalmi.5?ref=tn_tnmn',
-	:city=>'Jerusalem',
-	:state=>'',
-	:country=>'Israel',
-	:avatar=>'isaacfb.jpg',
-	:avatar_cache=>true,
-	:user_id=>1)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+user1 = User.first
+user1.roles << Role.find_by_title('Refinery')
+user1.roles << Role.find_by_title('Superuser')
+user1.roles << Role.find_by_title('Admin')
+user1.save
 
 user1 = User.create(:email=>'oliveadmin@gmail.com', :password=>'olivepass')  ##creating first user
 user2 = User.create(:email=>'olivemoderator@gmail.com', :password=>'olivepass')  ##creating first user
