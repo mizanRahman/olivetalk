@@ -2,7 +2,7 @@ Ot::Application.routes.draw do
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
 
-  mount Refinery::Core::Engine, :at => '/cms'
+  mount Refinery::Core::Engine, :at => '/university'
   mount RailsAdmin::Engine => '/manage', :as => 'rails_admin'
 
   resources :topics do
