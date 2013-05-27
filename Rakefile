@@ -22,6 +22,15 @@ task :deploy => [:push, :deploy_heroku]do
 
 end
 
+desc "push to heroku only"
+task :push_heroku do
+
+    puts "pushing to heroku"
+    system "git push #{deploy_remotes['heroku']} master"
+    puts "push complete"
+
+end
+
 
 desc "deploy to heroku only"
 task :deploy_heroku => [:commit] do

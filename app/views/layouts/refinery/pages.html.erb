@@ -16,16 +16,71 @@
     <div class="container">
       <a class="brand" href="<%= root_path %>">OliveTalk</a>
       <ul class="nav">
-      <li class="<%= 'active' if current_page?('/') %>"><%= link_to "Home", '/' %></li>
+      <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Home", root_path %></li>
       <li class="divider-vertical"></li>
+      <% if can? :read, :home %>
+        <li class="<%= 'active' if current_page?(main_app.topics_path) %>"><%= link_to "Engage", main_app.topics_path %></li>
+        <li class="divider-vertical"></li>
+        <li class="<%= 'active' if current_page?(main_app.resources_path) %>"><%= link_to "Pinboard", main_app.resources_path %></li>
+        <li class="divider-vertical"></li>
+          <li class="<%= 'active' if current_page?(main_app.networks_path) %>"><%= link_to "Community", main_app.networks_path %></li>
+        <li class="divider-vertical"></li>
+        <li><a href="#">Education</a></li>
+          <li class="divider-vertical"></li>
+        <li><a href="#">Alumni</a></li>
+          <li class="divider-vertical"></li>
+      <% if can? :access, :rails_admin %>
+        <li><a href="/manage">Admin</a></li>
+          <li class="divider-vertical"></li>
+          <% end %>
+          
+          <% end %>
       </ul>
     
-    
+    <ul class="nav pull-right">
+      <% if user_signed_in? %>
+        <li>
+        <%= if current_user.profile then
+          link_to 'My Profile', main_app.profile_path(current_user.profile.id)
+          
+        end %>
+        </li>
+        <li class="divider-vertical"></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li>
+          <%= if current_user.profile then
+            link_to 'Edit profile', main_app.edit_profile_path(current_user.profile.id) 
+          end %>
+          </li>
+          <li><%= link_to 'Edit account', main_app.edit_user_registration_path %></li>
+          <li><a href="#">Submit Feedback</a></li>
+          <li class="divider"></li>
+          <li><%= link_to 'Logout', main_app.destroy_user_session_path, :method => :delete %></li>
+
+        </ul>
+      <% else %>
+        <li><%= link_to "Sign up", main_app.new_user_registration_path %></li>
+        <li class="divider-vertical"></li>
+        <li><%= link_to "Login", main_app.new_user_session_path %></li>
+      <% end %>
+      <% if can? :read, :home %>
+      <li class="divider-vertical"></li>
+      <li><a href="#"><span class="badge badge-important" style="font-size:12px;padding-left:8px;padding-right:8px;">4</span> </a></li>
+      <% end %>
+    </ul>
   </div>
   </div>
 </div>
 
+<% if  user_signed_in? and current_user.roles.empty? %>
+  <div class="alert alert-error error-message">
+      <a class="close" data-dismiss="alert" href="#">&times;</a>
+      <p>your account is awating for approaval.</a>.</p>
+  </div>
 
+<% end %>
 
 
 <div class="container">
