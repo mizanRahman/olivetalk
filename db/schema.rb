@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130423174157) do
+ActiveRecord::Schema.define(:version => 20130601202854) do
 
   create_table "badges", :force => true do |t|
     t.string   "name"
@@ -68,6 +68,20 @@ ActiveRecord::Schema.define(:version => 20130423174157) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "notifications", :force => true do |t|
+    t.string   "activity_type"
+    t.string   "object_type"
+    t.string   "object_url"
+    t.datetime "time_sent"
+    t.integer  "subscription_id"
+    t.integer  "user_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "notifications", ["subscription_id"], :name => "index_notifications_on_subscription_id"
+  add_index "notifications", ["user_id"], :name => "index_notifications_on_user_id"
 
   create_table "posts", :force => true do |t|
     t.text     "content"
@@ -227,6 +241,17 @@ ActiveRecord::Schema.define(:version => 20130423174157) do
 
   add_index "seo_meta", ["id"], :name => "index_seo_meta_on_id"
   add_index "seo_meta", ["seo_meta_id", "seo_meta_type"], :name => "index_seo_meta_on_seo_meta_id_and_seo_meta_type"
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "subscribable_id"
+    t.string   "subscribable_type"
+    t.integer  "user_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "subscriptions", ["subscribable_id"], :name => "index_subscriptions_on_subscribable_id"
+  add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

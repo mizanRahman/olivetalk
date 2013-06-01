@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 
   has_one :profile, :dependent => :destroy
   has_many :badgeships, :dependent => :destroy
+  has_many :subscriptions
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :plugins

@@ -76,6 +76,15 @@ task :discard do
 	
 end
 
+#todo: will be improved later by calling rake task
+desc "database setup"
+task :db_setup do
+  system "rake db:reset"
+  system "rake db:migrate"
+  system "rake db:seed"
+end
+
+
 task :new_post, :title do |t, args|
   if args.title
     title = args.title

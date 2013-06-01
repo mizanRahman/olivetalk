@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  activity_type: MyString
+  object_type: MyString
+  object_url: MyString
+  time_sent: 2013-06-02 02:28:54
+  subscription: 
+  user: 
+
+two:
+  activity_type: MyString
+  object_type: MyString
+  object_url: MyString
+  time_sent: 2013-06-02 02:28:54
+  subscription: 
+  user: 
