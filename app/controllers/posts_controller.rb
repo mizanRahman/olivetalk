@@ -53,8 +53,11 @@ class PostsController < ApplicationController
   
     @post = Post.new(params[:post])
     @post.topic = @topic
-    
     @post.user_id = current_user.id
+
+    Subscription.subscribe(@topic,current_user)
+
+    Notification.addnew(@topic,current_user,"new post on Topic #{@topic.name}","Post","http://google.com",Time.now)
 
     respond_to do |format|
       if @post.save

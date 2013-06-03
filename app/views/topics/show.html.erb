@@ -7,6 +7,15 @@
 
 		<h1 style="background-color:#333;color:#fff;padding:15px;margin:0px;border-top-left-radius:5px;text-shadow:0 1px 0 #ccc;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;font-size:28px"><%= @topic.name %></h1>
 
+		<p>
+			<%= simple_form_for([@topic,Subscription.new]) do |f| %>
+ 			  <div class="form-actions" style="text-align:right">
+			  	 <%= f.submit 'Subscribe', class: 'btn-primary btn-small' %>
+			  </div>
+			<% end %>
+			  
+ 		</p>
+
 		<div style="padding:20px;background-color:#fff">
 		
 			<p style="color:#999"><%= simple_format(@topic.content) %></p>

@@ -7,7 +7,11 @@ Ot::Application.routes.draw do
 
   resources :topics do
   		resources :posts
-  		resources :resources
+      resources :resources
+  		resources :subscriptions
+      # get "subscriptions/subscribe", to: "topics#approve"
+
+
   end
 
   resources :badgeships
@@ -28,6 +32,11 @@ Ot::Application.routes.draw do
 
   get 'resources/tag/:tag', to: 'resources#index', as: :resource_tag
 
+  # match "subscriptions/subscribe", to: "subscriptions#subscribe", via: "post"
+  # match "subscriptions/unsubscribe", to: "subscriptions#unsubscribe", via: "post"
+  # get "subscriptions/subscribe"
+  # get "subscriptions/unsubscribe"
+  
   root :to => "home#index"
 
 end
