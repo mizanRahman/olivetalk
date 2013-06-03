@@ -14,7 +14,6 @@ class SubscriptionsController < ApplicationController
   	@subscription.subscribable = @subscribable
   	@subscription.user = current_user
     @subscription.save
-    p "subscription saved----------------------------------------------------"
 
     respond_to do |format|
         format.html { redirect_to @subscribable, notice: 'You are subscribed to this topic.' }
@@ -24,12 +23,7 @@ class SubscriptionsController < ApplicationController
   end
 
 
-  def subscribe
-	s=Subscription.new
-	s.subscribable = find_subscribable
-	s.user = current_user
-	s.save
-  end
+
 
   def unsubscribe
   end

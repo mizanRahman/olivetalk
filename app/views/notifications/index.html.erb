@@ -1,0 +1,21 @@
+<h1>Notifications</h1>
+
+<table class="table table-bordered table-hover">
+  <tr>
+    <th>activity_type</th>
+    <th>object_type</th>
+    <th>object_url</th>
+    <th>time_sent</th>
+  </tr>
+
+<% @notifications.each do |notification| %>
+  <tr>
+
+    <td><%= notification.activity_type %></td>
+    <td><%= notification.object_type %></td>
+    <td><%= notification.object_url %></td>
+    <td><%= notification.time_sent %></td>
+
+  </tr>
+<% end %>
+</table>

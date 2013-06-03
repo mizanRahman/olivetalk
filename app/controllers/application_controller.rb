@@ -2,6 +2,17 @@ class ApplicationController < ActionController::Base
   
   protect_from_forgery
   #check_authorization
+  before_filter :unread_count
+
+
+  def unread_count
+    if current_user then
+
+      @notification_count = Notification.where(
+        'user_id'=>current_user.id, 
+        'unread'=>true).count
+    end
+  end
   
   def check_for_profile
   	if current_user then

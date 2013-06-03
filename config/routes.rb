@@ -1,9 +1,13 @@
 Ot::Application.routes.draw do
 
+
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
 
   mount Refinery::Core::Engine, :at => '/university'
   mount RailsAdmin::Engine => '/manage', :as => 'rails_admin'
+
+
+  get "notifications", to: 'notifications#index'
 
   resources :topics do
   		resources :posts
@@ -31,6 +35,8 @@ Ot::Application.routes.draw do
   match 'topics/:id/approve' => 'topics#approve'
 
   get 'resources/tag/:tag', to: 'resources#index', as: :resource_tag
+
+
 
   # match "subscriptions/subscribe", to: "subscriptions#subscribe", via: "post"
   # match "subscriptions/unsubscribe", to: "subscriptions#unsubscribe", via: "post"

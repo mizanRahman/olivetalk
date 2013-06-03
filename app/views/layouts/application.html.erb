@@ -67,7 +67,9 @@
 			<% end %>
 			<% if can? :read, :home %>
 			<li class="divider-vertical"></li>
-			<li><a href="#"><span class="badge badge-important" style="font-size:12px;padding-left:8px;padding-right:8px;">4</span> </a></li>
+			<li><a href="/notifications"><span class="badge badge-important" style="font-size:12px;padding-left:8px;padding-right:8px;">
+				<%= @notification_count%>
+			</span> </a></li>
 			<% end %>
 		</ul>
 	</div>
