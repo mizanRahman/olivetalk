@@ -3,10 +3,14 @@ class UserMailer < ActionMailer::Base
   default from: "dev.mizan.rahman@gmail.com"
 
 
-  def welcome_email(user)
-  	@name = user.profile.first_name = "kahan"
-  	user.email = "dev.mizan.rahman@gmail.com" #over riding for restricting mass email
-    mail(:to => user.email, :subject => "Welcome to My Awesome Site")
+  def notification_email(notification)
+  	@notification = notification
+    @notification.user.email = "dev.mizan.rahman@gmail.com" #over riding for restricting mass email
+    
+    mail(
+      :to => @notification.user.email, 
+      :subject => "Olivetalk Notifications"
+      )
   end
 
 

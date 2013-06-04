@@ -19,7 +19,7 @@ class Notification < ActiveRecord::Base
 	  		@noti.unread=true
 	  		@noti.save
 
-	  		UserMailer.welcome_email(@noti.user).deliver 
+	  		UserMailer.notification_email(@noti).deliver 
 
 	  	end
 

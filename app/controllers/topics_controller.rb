@@ -73,6 +73,7 @@ class TopicsController < ApplicationController
     @topic.last_poster_id = current_user.id
     @topic.last_post_at = Time.now
     
+    Subscription.subscribe(@topic,current_user) 
     
     respond_to do |format|
       if @topic.save

@@ -4,7 +4,8 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <p><%=@name%>, you have unread notifications<p>
+    <p><%=@notification.user.profile.first_name%>, you have unread notifications<p>
+    	<p><%=@notification.activity_type%></p>
     <p>Thanks for joining and have a great day!</p>
   </body>
 </html>
