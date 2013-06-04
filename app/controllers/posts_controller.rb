@@ -57,7 +57,12 @@ class PostsController < ApplicationController
 
     Subscription.subscribe(@topic,current_user)
 
-    Notification.addnew(@topic,current_user,"new post on Topic #{@topic.name}","Post","http://google.com",Time.now)
+    Notification.addnew(
+      @topic,
+      current_user,
+      "new response post on Topic #{@topic.name}",
+      "Post","http://localhost.com",
+      Time.now)
 
     respond_to do |format|
       if @post.save
